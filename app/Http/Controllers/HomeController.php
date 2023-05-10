@@ -10,6 +10,15 @@ class HomeController extends Controller
 {
     public function index()
     {
+        $categories = $this->category_info();
+        return view('home', compact('categories'));
+    }
+
+
+    public function category_info()
+    {
+
+
 
         $categories = Category::where('parent_id', 0)
         ->where('type_id', 4)
@@ -31,6 +40,6 @@ class HomeController extends Controller
             $item->tag = str_replace(' ', '', $item->cat_name);
         }
 
-        return view('home', compact('categories'));
+        return $categories;
     }
 }

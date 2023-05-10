@@ -35,6 +35,7 @@
                   @foreach ($categories as $item)
                   <li><a class="dropdown-item" href="#{{$item->tag}}">{{$item->cat_name}}</a></li>
                   @endforeach
+                  <li><a class="dropdown-item" href="{{route('category.all')}}">All</a></li>
                 </ul>
               </li>
               {{-- <li class="nav-item dropdown">

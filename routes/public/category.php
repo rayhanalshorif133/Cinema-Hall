@@ -15,6 +15,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+Route::prefix('category/')
+    ->name('category.')
+    ->controller(CategoryController::class)
+    ->group(function(){
+    Route::get('/all','category_all')->name('all');
+    Route::get('/{id?}/{name?}','category_detail')->name('detail');
+});
 
-Route::get('/category/{id?}/{name?}',[CategoryController::class,'category_detail'])
-    ->name('category.detail');
