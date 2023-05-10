@@ -5,7 +5,7 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <a class="navbar-brand" href="#">
-        <img src="images/logo.png" style="height: 40px; width: auto;" alt="" title="">
+        <img src="{{asset("assets/images/logo.png")}}" style="height: 40px; width: auto;" alt="" title="">
       </a>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
         <ul class="navbar-nav">
@@ -13,7 +13,7 @@
             <a class="nav-link" href="#">
               &nbsp Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
+          {{-- <li class="nav-item">
             <a class="nav-link" href="#"> &nbsp Popular</a>
           </li>
           <li class="nav-item">
@@ -25,15 +25,14 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">&nbsp Recomended</a>
-          </li>
+          </li> --}}
 
           <li class="nav-item dropdown">
             <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> Category </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#"> Movie</a></li>
-              <li><a class="dropdown-item" href="#"> Video Clip </a></li>
-              <li><a class="dropdown-item" href="#"> Music </a></li>
-              <li><a class="dropdown-item" href="#"> Natok </a></li>
+              @foreach ($categories as $item)
+              <li><a class="dropdown-item" href="#{{$item->tag}}">{{$item->cat_name}}</a></li>
+              @endforeach
             </ul>
           </li>
           <li class="nav-item dropdown">
@@ -46,12 +45,14 @@
               <li><a class="dropdown-item" href="#"> Thriller </a></li>
             </ul>
           </li>
+          {{-- 
           <li class="nav-item">
             <a class="nav-link" href="#">&nbsp Watchlist</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">&nbsp Account</a>
           </li>
+           --}}
           <li class="nav-item">
             <a class="nav-link" href="#">&nbsp Logout</a>
           </li>

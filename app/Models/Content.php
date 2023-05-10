@@ -46,4 +46,8 @@ class Content extends Model
         'status',
         'owner_status',
     ];
+
+
+    // updated_at and created_at are not needed
+    public $timestamps = false;
 }

@@ -19,10 +19,16 @@ class HomeController extends Controller
         ->get();
 
         foreach ($categories as $key => $item) {
-            $categories[$key]->contents = Content::select('id','title', 'description')
+            $contents = Content::select('id','title', 'description')
             ->where('cat_id', $item->id)
             ->where('status', 'published')
+            ->orderBy('id', 'desc')
+            ->limit(5)
             ->get();
+            if($contents->count() > 0){
+                $categories[$key]->contents = $contents;
+            }
+            $item->tag = str_replace(' ', '', $item->cat_name);
         }
 
         return view('home', compact('categories'));
