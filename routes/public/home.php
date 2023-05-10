@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,6 +15,5 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-foreach (glob(base_path('routes/public/*.php')) as $route) {
-    require_once $route;
-}
+
+Route::get('/',[HomeController::class,'index'])->name('home');
