@@ -7,7 +7,13 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
   
-    <title>Cateogy</title>
+    <title>
+        @if($title)
+        {{$title}}
+        @else
+        Cinema-Hall
+        @endif
+    </title>
   
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
     <link

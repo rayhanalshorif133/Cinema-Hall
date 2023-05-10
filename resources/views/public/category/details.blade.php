@@ -1,4 +1,4 @@
-@include('layouts._partials.headTag')
+@include('layouts._partials.headTag', ['title' => $name])
 
 <body>
   <section id="top-banner-panel">
@@ -10,7 +10,7 @@
           </a>
         </div>
         <div class="col-8 col-sm-10 text-center">
-          <h2 style="color: #00f9ff; text-align: center; font-size: 1.8rem;">Category</h2>
+          <h2 style="color: #00f9ff; text-align: center; font-size: 1.8rem;" class="text-capitalize">{{$name}}</h2>
         </div>
         <div class="col-2 col-sm-1 text-center">
         </div>
