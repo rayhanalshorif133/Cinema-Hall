@@ -4,13 +4,13 @@
         aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="{{route('home')}}">
         <img src="{{asset("assets/images/logo.png")}}" style="height: 40px; width: auto;" alt="" title="">
       </a>
       <div class="collapse navbar-collapse justify-content-center" id="navbarNavDropdown">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{route('home')}}">
               &nbsp Home <span class="sr-only">(current)</span></a>
           </li>
           {{-- <li class="nav-item">

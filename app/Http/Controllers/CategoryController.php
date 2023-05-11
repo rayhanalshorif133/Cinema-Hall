@@ -10,7 +10,8 @@ class CategoryController extends Controller
     {
         $homeController = new HomeController();
         $categories = $homeController->category_info();
-        return view('public.category.all', compact('categories'));
+        $title = 'Cinema-Hall | All Categories';
+        return view('public.category.all', compact('categories', 'title'));
     }
     
     public function category_detail($id = null,$name = null)

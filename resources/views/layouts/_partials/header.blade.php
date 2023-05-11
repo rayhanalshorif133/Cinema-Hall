@@ -12,7 +12,7 @@
 
             <ul class="navbar-nav bg-transparent fixed-top" id="sidebar-wrapper">
               <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('home')}}">
                   &nbsp Home <span class="sr-only">(current)</span></a>
               </li>
               {{-- <li class="nav-item">
@@ -60,7 +60,7 @@
             </ul>
 
           </div>
-          <a class="navbar-brand text-center d-block " href="#">
+          <a class="navbar-brand text-center d-block " href="{{route('home')}}">
 
             <img src="{{asset("assets/images/logo.png")}}" style="height: 40px; width: auto;" alt="" title="">
           </a>
