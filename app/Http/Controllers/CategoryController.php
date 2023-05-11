@@ -45,7 +45,8 @@ class CategoryController extends Controller
                 ->get();
             }
             $name = str_replace('-', ' ', $name);
-            return view('public.category.details', compact('sub_categories','name'));
+            $category_id = $id;
+            return view('public.category.details', compact('category_id','sub_categories','name'));
         }
     }
 }

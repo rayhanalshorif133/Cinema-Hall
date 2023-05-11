@@ -27,7 +27,6 @@
 
         @if($sub_category->contents->count() == 0)
         @for ($index = 0; $index < 4; $index++)
-
         @php
           $rand = rand(1, 1000);
         @endphp
@@ -38,7 +37,7 @@
                 <input type="checkbox">
                 <span class="checkmark"></span>
               </label>
-              <a href="/">
+              <a href="/dlskvcksdamkl">
                 <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$rand}}" alt="Card image cap ">
                 <p class="card-text text-center text-white mt-2">
                   No Content Found
@@ -57,8 +56,8 @@
                 <input type="checkbox">
                 <span class="checkmark"></span>
               </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$contentKey}}" alt="Card image cap ">
+              <a href="{{route('watch.index',$content->id)}}">
+                <img class="card-img-top cover img-responsive" src="{{asset('storage/'.$content->prv1_file_name)}}" alt="Card image cap ">
                 <p class="card-text text-center text-white mt-2">
                   {{$content->title}}
                 </p>
