@@ -36,4 +36,8 @@ class WatchController extends Controller
         }
         
     }
+
+    public function watchPlay($content_id){
+        dd($content_id);
+    }
 }

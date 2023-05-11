@@ -20,5 +20,6 @@ Route::prefix('watch/')
     ->controller(WatchController::class)
     ->group(function(){
     Route::get('/{content_id?}','index')->name('index');
+    Route::get('/{content_id}/play','watchPlay')->name('play');
 });
 

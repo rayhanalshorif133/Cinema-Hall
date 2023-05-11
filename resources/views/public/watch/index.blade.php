@@ -23,13 +23,13 @@
         <img id="video-cover" src="{{asset('storage/'.$content->prv1_file_name)}}" alt="Video title" class="img-fluid"
           style="width:100%; margin: 0 auto;">
 
-        <iframe id="video" width="100%" height="auto" src="https://www.youtube.com/embed/d7lCZ0rpH3o" frameborder="0"
+        {{-- <iframe id="video" width="100%" height="auto" src="https://www.youtube.com/embed/d7lCZ0rpH3o" frameborder="0"
           allow="autoplay; encrypted-media" allowfullscreen>
-        </iframe>
+        </iframe> --}}
         <button id="playbutton" class="play-btn">
           <div class="row row-cols-2 row-cols-sm-2 justify-content-center">
             <div class="col-6 text-right left-play-btn">
-              <a href="">
+              <a href="{{route('watch.play',$content->id)}}">
                 Play Now
               </a>
             </div>

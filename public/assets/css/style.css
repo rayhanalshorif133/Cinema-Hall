@@ -386,7 +386,7 @@ button.navbar-toggler {
 /* Create a custom checkbox */
 .label-check .checkmark {
   position: absolute;
-  top: 0;
+  top: 10;
   right: 0;
   background-image: url(../images/flag.png);
   background-position: top right;
