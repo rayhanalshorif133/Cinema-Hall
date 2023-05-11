@@ -20,7 +20,36 @@
   <main role="main">
     <!--/ Section Three Star /-->
     <section id="section_three">
-      <div id="three_carousel" class="owl-carousel ">
+      @foreach ($sub_categories as $sub_categoryKey => $sub_category)
+      
+      <h4 class="text-white px-2 m-2">{{$sub_category->cat_name}}</h4>
+      <div id="{{$sub_categoryKey}}_carousel" class="owl-carousel">
+
+        @if($sub_category->contents->count() == 0)
+        @for ($index = 0; $index < 4; $index++)
+
+        @php
+          $rand = rand(1, 1000);
+        @endphp
+        <div class="carousel-item-b">
+          <div class="card-box-a card-shadow">
+            <div class="card-body">
+              <label class="label-check">
+                <input type="checkbox">
+                <span class="checkmark"></span>
+              </label>
+              <a href="/">
+                <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$rand}}" alt="Card image cap ">
+                <p class="card-text text-center text-white mt-2">
+                  No Content Found
+                </p>
+              </a>
+            </div>
+          </div>
+        </div>
+        @endfor
+        @else
+        @foreach ($sub_category->contents as $contentKey => $content)
         <div class="carousel-item-b">
           <div class="card-box-a card-shadow">
             <div class="card-body">
@@ -29,115 +58,18 @@
                 <span class="checkmark"></span>
               </label>
               <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-4.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
+                <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$contentKey}}" alt="Card image cap ">
+                <p class="card-text text-center text-white mt-2">
+                  {{$content->title}}
+                </p>
               </a>
             </div>
           </div>
         </div>
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-5.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1</p>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-6.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1</p>
-              </a>
-            </div>
-          </div>
-        </div>
+        @endforeach
+        @endif
       </div>
-      <div id="two_carousel" class="owl-carousel ">
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-1.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-2.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1</p>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-3.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div id="four_carousel" class="owl-carousel ">
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-7.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
-              </a>
-            </div>
-          </div>
-        </div>
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="">
-                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-5.png')}}" alt="Card image cap ">
-                <p class="card-text text-center">Name -1</p>
-              </a>
-            </div>
-          </div>
-        </div>
-      </div>
+      @endforeach
     </section>
     <!--/ Section three End /-->
   </main>
@@ -195,6 +127,28 @@
           $('.nav-top-item').removeClass("fixedNav");
         }
       });
+
+    var countOfSubCategories = {{ count($sub_categories) }};
+    for (let index = 0; index < countOfSubCategories; index++) {
+        $(`#${index}_carousel`).owlCarousel({
+        loop: true,
+        margin: 10,
+        responsive: {
+          0: {
+            items: 1,
+          },
+          576: {
+            items: 2,
+          },
+          769: {
+            items: 3,
+          },
+          992: {
+            items: 4,
+          },          
+        },
+      });
+    }
     });
   </script>
 
