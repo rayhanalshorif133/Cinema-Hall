@@ -37,7 +37,7 @@
                                 <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
-                            <a href="">
+                            <a href="{{route('watch.index',[$item->id])}}">
                                 <img class="card-img-top cover img-responsive"
                                     src="https://picsum.photos/500/300?random={{$rendom}}" alt="Card image cap ">
                                 <p class="card-text text-center text-white mt-2">{{$item->title}}</p>
