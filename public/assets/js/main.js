@@ -1,3 +1,5 @@
+// File: public\assets\js\main.js
+
 (function ($) {
   "use strict";
   // Preloader
@@ -148,4 +150,12 @@
       },
     },
   });
+
+
+  
+
+
+
+
+
 })(jQuery);

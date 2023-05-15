@@ -10,7 +10,6 @@ class Category extends Model
     use HasFactory;
 
 
-
     protected $table = 'b2m_cms_category';
 
 

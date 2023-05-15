@@ -52,7 +52,7 @@
         <div class="carousel-item-b">
           <div class="card-box-a card-shadow">
             <div class="card-body">
-              <label class="label-check">
+              <label class="label-check" id="{{$content->id}}">
                 <input type="checkbox">
                 <span class="checkmark"></span>
               </label>
@@ -108,6 +108,9 @@
   <!-- Bootstrap core JavaScript
     ================================================== -->
   <!-- Placed at the end of the document so the pages load faster -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="{{asset('js/app.js')}}"></script>
+
   <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
