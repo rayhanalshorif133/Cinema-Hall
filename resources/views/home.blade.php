@@ -4,45 +4,47 @@
 @endpush
 
 @section('content')
-    <section id="section_fav" style="margin-bottom: 2%;">
-        <div class="wrap-one d-flex justify-content-between">
-            <div class="title-box" id="fav">
-                <h3 class="title-a">
-                    Favorite List
-                </h3>
-            </div>
-            <div class="more-link">
-                <a href="#">see all
-                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
-                </a>
-            </div>
-        </div>
-        <div id="fav_carousel" class="owl-carousel">
-            @if($favoriteContents != '')
-            @foreach ($favoriteContents as $contentKey => $item)
-                @php
-                    $rendom = $contentKey + rand(10, 100);
-                @endphp
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="label-check" id="{{ $item->id }}">
-                                <input type="checkbox" checked>
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="{{ route('watch.index', [$item->id]) }}">
-                                <img class="card-img-top cover img-responsive"
-                                    src="https://picsum.photos/500/300?random={{ $rendom }}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center text-white mt-2">{{ $item->title }}</p>
-                            </a>
-                        </div>
-                    </div>
+    @if ($favoriteContents->count() > 0)
+        <section id="section_fav" style="margin-bottom: 2%;">
+            <div class="wrap-one d-flex justify-content-between">
+                <div class="title-box" id="fav">
+                    <h3 class="title-a">
+                        Favorite List
+                    </h3>
                 </div>
-            @endforeach
-            @endif
-        </div>
-    </section>
+                <div class="more-link">
+                    <a href="#">see all
+                        <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>
+            <div id="fav_carousel" class="owl-carousel">
+                @if ($favoriteContents->count()> 0)
+                    @foreach ($favoriteContents as $contentKey => $item)
+                        @php
+                            $rendom = $contentKey + rand(10, 100);
+                        @endphp
+                        <div class="carousel-item-b">
+                            <div class="card-box-a card-shadow">
+                                <div class="card-body">
+                                    <label class="label-check" id="{{ $item->id }}">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                    </label>
+                                    <a href="{{ route('watch.index', [$item->id]) }}">
+                                        <img class="card-img-top cover img-responsive"
+                                            src="https://picsum.photos/500/300?random={{ $rendom }}"
+                                            alt="Card image cap ">
+                                        <p class="card-text text-center text-white mt-2">{{ $item->title }}</p>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                @endif
+            </div>
+        </section>
+    @endif
     @foreach ($categories as $catKey => $category)
         @php
             $tempKey = $catKey + 1;
@@ -55,7 +57,7 @@
             <div class="wrap-one d-flex justify-content-between">
                 <div class="title-box" id="{{ $category->tag }}">
                     <h3 class="title-a">
-                        {{ $category->cat_name }}
+                        {{ $category->cat_name }} {{ $category->id }}
                     </h3>
                 </div>
                 <div class="more-link">
@@ -73,11 +75,11 @@
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
                                 <label class="label-check" id="{{ $item->id }}">
-                                    {{$item->is_favorite}}
-                                    @if($item->is_favorite == 1)
+                                    {{ $item->is_favorite }}
+                                    @if ($item->is_favorite == 1)
                                         <input type="checkbox" checked>
                                     @else
-                                    <input type="checkbox">
+                                        <input type="checkbox">
                                     @endif
                                     <span class="checkmark"></span>
                                 </label>
@@ -98,12 +100,6 @@
 
 @push('scripts')
     <script>
-        
-
-        // function createCheckMark(this){
-        //     console.log($(this).parent().attr('id'));
-        // }
-
         var countOfCategories = {{ count($categories) }};
         for (let index = 0; index < countOfCategories; index++) {
             $(`#${index}_carousel`).owlCarousel({
