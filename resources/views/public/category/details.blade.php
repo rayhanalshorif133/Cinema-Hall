@@ -57,7 +57,13 @@
                 <span class="checkmark"></span>
               </label>
               <a href="{{route('watch.index',$content->id)}}">
-                <img class="card-img-top cover img-responsive" src="{{asset('storage/'.$content->prv1_file_name)}}" alt="Card image cap ">
+                @php
+                  $rand = rand(1, 1000);
+                  $img = $content->prv1_file_name ? asset('storage/'.$content->prv1_file_name) : 
+                  $content->prv2_file_name ? asset('storage/'.$content->prv2_file_name) :
+                  'https://picsum.photos/500/300?random='.$rand;
+                @endphp
+                <img class="card-img-top cover img-responsive" src="{{$img}}" alt="Card image cap ">
                 <p class="card-text text-center text-white mt-2">
                   {{$content->title}}
                 </p>
@@ -72,7 +78,7 @@
     </section>
     <!--/ Section three End /-->
   </main>
-  <footer id="footer-menu-panel">
+  <footer id="footer-menu-panel" style="margin-top: 10%">
     <div class="container-fluid">
       <div class="row ">
         <nav class=" navbar-expand navbar-dark bg-dark fixed-bottom ">

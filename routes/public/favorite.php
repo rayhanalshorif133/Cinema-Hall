@@ -20,5 +20,6 @@ Route::prefix('favorite/')
     ->controller(FavoriteController::class)
     ->group(function(){
     Route::post('create','create')->name('create');
+    Route::get('see-more','showAllFavorite')->name('show-all-favorite');
 });
 

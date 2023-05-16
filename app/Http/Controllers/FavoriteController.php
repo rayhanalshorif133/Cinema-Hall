@@ -49,4 +49,9 @@ class FavoriteController extends Controller
         }
 
     }
+
+    public function showAllFavorite()
+    {
+        return view('public.others.favorite_all');
+    }
 }

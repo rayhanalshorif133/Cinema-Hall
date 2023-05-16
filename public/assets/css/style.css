@@ -311,6 +311,8 @@ section.nav-top-item.fixedNav {
   margin-bottom: 0rem;
   padding: 3px 10px;
 }
+
+.see_all,
 #section_one .more-link a,
 #section_two .more-link a,
 #section_three .more-link a,
@@ -321,6 +323,12 @@ section.nav-top-item.fixedNav {
   color: #00f9ff;
   padding-top: 8px;
   display: block;
+}
+
+
+.see_all:hover {
+  color: #00f9ff;
+  text-decoration: underline;
 }
 
 #subscription .justify-content-center {

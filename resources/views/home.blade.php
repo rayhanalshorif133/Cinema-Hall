@@ -13,13 +13,13 @@
                     </h3>
                 </div>
                 <div class="more-link">
-                    <a href="#">see all
+                    <a href="{{ route('favorite.show-all-favorite') }}" class="see_all">see all
                         <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
                     </a>
                 </div>
             </div>
             <div id="fav_carousel" class="owl-carousel">
-                @if ($favoriteContents->count()> 0)
+                @if ($favoriteContents->count() > 0)
                     @foreach ($favoriteContents as $contentKey => $item)
                         @php
                             $rendom = $contentKey + rand(10, 100);
@@ -121,6 +121,7 @@
                 },
             });
         }
+
 
         $('#fav_carousel').owlCarousel({
             loop: true,

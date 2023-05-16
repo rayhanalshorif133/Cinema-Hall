@@ -11,28 +11,18 @@ class HomeController extends Controller
 {
     public function index()
     {
-        // $this->test();
         $favorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")  
         ->first();
-
-
         $categories = $this->category_info();
         $favoriteContents = "";
-
-
-        // type of
-        
         if($favorite){
             $contentIds = $favorite->get_content_ids($favorite->content_ids);
             $favoriteContents = Content::select('id', 'title', 'description')->whereIn('id', $contentIds)->get();           
         }
-
-
+        if( $favoriteContents == ""){
+            $favoriteContents = [];
+        }
         return view('home', compact('categories', 'favoriteContents'));
-
-
-
-
     }
 
 
@@ -49,7 +39,7 @@ class HomeController extends Controller
         foreach ($categories as $key => $item) {
             $contents = Content::select('id', 'title', 'description')
                 ->where('cat_id', $item->id)
-                ->where('status', 'published')
+                ->where('type', 'video')
                 ->orderBy('id', 'desc')
                 ->limit(5)
                 ->get();
@@ -64,6 +54,8 @@ class HomeController extends Controller
                     }
                 }
                 $categories[$key]->contents = $contents;
+            }else{
+                $categories[$key]->contents = [];
             }
             $item->tag = str_replace(' ', '', $item->cat_name);
         }
@@ -71,37 +63,4 @@ class HomeController extends Controller
         return $categories;
     }
 
-
-
-    public function test()
-    {
-        $cont_id = "453";
-
-        $findFavorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")->first();
-
-        if(!$findFavorite){
-            $favorite = new Favorite();
-            $favorite->key_id = $this->get_msisdn() ? $this->get_msisdn() : "0";
-            $favorite->content_ids = json_encode($cont_id);
-            $favorite->save();
-            dd('new test',$favorite);
-        }else{
-            // update content_ids
-            $updateFavorite = $findFavorite ? json_decode($findFavorite->content_ids) : [];
-
-            // $updateFavorite to array
-            $updateFavorite = (array) $updateFavorite;
-
-            // check content_id is exist or not
-            if(!in_array($cont_id, $updateFavorite)){
-                array_push($updateFavorite, $cont_id);
-            }
-
-
-
-
-
-        }
-
-    }
 }
