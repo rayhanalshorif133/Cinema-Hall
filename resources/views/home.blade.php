@@ -4,7 +4,7 @@
 @endpush
 
 @section('content')
-    @if ($favoriteContents->count() > 0)
+    @if ($favoriteContents != null)
         <section id="section_fav" style="margin-bottom: 2%;">
             <div class="wrap-one d-flex justify-content-between">
                 <div class="title-box" id="fav">
@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div id="fav_carousel" class="owl-carousel">
-                @if ($favoriteContents->count() > 0)
+                @if ($favoriteContents != null)
                     @foreach ($favoriteContents as $contentKey => $item)
                         @php
                             $rendom = $contentKey + rand(10, 100);
@@ -57,7 +57,8 @@
             <div class="wrap-one d-flex justify-content-between">
                 <div class="title-box" id="{{ $category->tag }}">
                     <h3 class="title-a">
-                        {{ $category->cat_name }} {{ $category->id }}
+                        {{ $category->cat_name }} 
+                        {{-- {{ $category->id }} --}}
                     </h3>
                 </div>
                 <div class="more-link">

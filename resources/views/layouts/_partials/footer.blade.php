@@ -4,7 +4,7 @@
         <nav class=" navbar-expand navbar-dark bg-dark fixed-bottom ">
           <ul class="navbar">
             <li class="nav-item">
-              <a class="nav-link active" href="#">
+              <a class="nav-link active" href="{{route('home')}}">
                 <i class="fas fa-home fa-2x"></i>
               </a>
             </li>
@@ -14,7 +14,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">
+              <a class="nav-link" aria-current="page" href="{{route('favorite.show-all-favorite')}}">
                 <i class="far fa-heart fa-2x"></i>
               </a>
             </li>
@@ -30,3 +30,4 @@
       </div>
     </div>
   </footer>
+  <div id="preloader"></div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Content;
 use App\Models\Favorite;
 use Illuminate\Http\Request;
 
@@ -52,6 +53,26 @@ class FavoriteController extends Controller
 
     public function showAllFavorite()
     {
-        return view('public.others.favorite_all');
+        $favorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")  
+        ->first();
+        // GET CONTENTS
+        $_NEED_CONTENT = [
+            'id',
+            'title',
+            'description',
+            'cat_id',
+            'sub_cat_id',
+            'prv1_file_name',
+            'prv2_file_name',
+            'details1_file_name',
+            'details2_file_name'
+        ];
+        $favorite_contents = Content::select($_NEED_CONTENT)
+                    ->whereIn('id', $favorite->get_content_ids($favorite->content_ids))
+                    ->where('type', 'video')
+                    ->orderBy('id', 'desc')
+                    ->get();
+                // dd($favorite_contents);
+        return view('public.others.favorite_all', compact('favorite_contents'));
     }
 }

@@ -5,8 +5,8 @@
         <div class="container-fluid">
             <div class="row row-cols-3 row-cols-sm-3 justify-content-center">
                 <div class="col-2 col-sm-1 text-left">
-                    <a href="{{route('home')}}">
-                      <img src="{{asset('assets/images/top-left-arrow.png')}}" class="img-fluid">
+                    <a href="{{ route('home') }}">
+                        <img src="{{ asset('assets/images/top-left-arrow.png') }}" class="img-fluid">
                     </a>
                 </div>
                 <div class="col-8 col-sm-10 text-center">
@@ -20,173 +20,33 @@
     <main role="main">
         <!--/ Section Three Star /-->
         <section id="section_three" style="margin-bottom: 20%;">
-            <div id="three_carousel" class="owl-carousel ">
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
+            <div class="row">
+                @foreach ($favorite_contents as $content)
+                    <div class="card-box-a card-shadow col-md-4">
                         <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
+                            <label class="fvrt-label-check" id="{{$content->id}}">
+                                <input type="checkbox" checked>
                                 <span class="checkmark"></span>
                             </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-4.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
+                            @php
+                                $rand = rand(1, 1000);
+                                $img = ($content->prv1_file_name ? asset('storage/' . $content->prv1_file_name) : $content->prv2_file_name) ? asset('storage/' . $content->prv2_file_name) : 'https://picsum.photos/500/300?random=' . $rand;
+                            @endphp
+                            <a href="{{ route('watch.index', $content->id) }}">
+                                <img class="card-img-top cover img-responsive"
+                                    src="{{$img}}" alt="Card image cap ">
+                                <p class="card-text text-center">
+                                    <span class="card-text-a">{{ $content->title }}</span>
+                                </p>
                             </a>
                         </div>
                     </div>
-                </div>
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-5.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-6.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="two_carousel" class="owl-carousel ">
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-1.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-2.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-3.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div id="four_carousel" class="owl-carousel ">
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-7.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1 sdfsf asdf asdf adassd</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item-b">
-                    <div class="card-box-a card-shadow">
-                        <div class="card-body">
-                            <label class="fvrt-label-check">
-                                <input type="checkbox">
-                                <span class="checkmark"></span>
-                            </label>
-                            <a href="">
-                                <img class="card-img-top cover img-responsive" src="{{asset('assets/images/img-5.png')}}"
-                                    alt="Card image cap ">
-                                <p class="card-text text-center">Name -1</p>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 mt-4">
-                <h3 style="color:#e9ecef; font-size: 1.5rem;">Add More Favourite list <a href=""
-                        style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"><i
-                            class="fas fa-plus"></i></a>
-                </h3>
+                @endforeach
             </div>
         </section>
         <!--/ Section three End /-->
     </main>
-    <footer id="footer-menu-panel">
-        <div class="container-fluid">
-            <div class="row ">
-                <nav class=" navbar-expand navbar-dark bg-dark fixed-bottom ">
-                    <ul class="navbar">
-                        <li class="nav-item">
-                            <a class="nav-link " href="#">
-                                <i class="fas fa-home fa-2x"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
-                                <i class="fas fa-search fa-2x"></i>
-                            </a>
-                        </li>
-                        <li class="nav-item ">
-                            <a class="nav-link active" aria-current="page" href="#">
-                                <i class="far fa-heart fa-2x"></i>
-                            </a>
-                        </li>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="#">
-                                <i class="fas fa-user fa-2x"></i>
-                            </a>
-                        </li>
-                    </ul>
-
-                </nav>
-            </div>
-        </div>
-    </footer>
+    @include('layouts._partials.footer')
     <!-- Bootstrap core JavaScript
       ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -325,6 +325,14 @@ section.nav-top-item.fixedNav {
   display: block;
 }
 
+.card-text-a{
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  padding-top: 8px;
+  display: block;
+}
+
 
 .see_all:hover {
   color: #00f9ff;

@@ -2108,7 +2108,7 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
   \**********************************/
 /***/ (() => {
 
-$(".checkmark").click(function () {
+$(document).on('click', ".checkmark", function () {
   // createCheckMark(this);
   var id = $(this).parent().attr('id');
   console.log("click", id);

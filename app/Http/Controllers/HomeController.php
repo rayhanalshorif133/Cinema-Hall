@@ -17,10 +17,14 @@ class HomeController extends Controller
         $favoriteContents = "";
         if($favorite){
             $contentIds = $favorite->get_content_ids($favorite->content_ids);
-            $favoriteContents = Content::select('id', 'title', 'description')->whereIn('id', $contentIds)->get();           
+            $favoriteContents = Content::select('id', 'title', 'description')->whereIn('id', $contentIds)->get();       
         }
-        if( $favoriteContents == ""){
-            $favoriteContents = [];
+        if($favoriteContents == ""){
+            $favoriteContents = null;
+        }
+
+        if(gettype($favoriteContents) === "object" && count($favoriteContents) == 0){
+            $favoriteContents = $favoriteContents->toArray();
         }
         return view('home', compact('categories', 'favoriteContents'));
     }

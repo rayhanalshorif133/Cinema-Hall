@@ -1,6 +1,5 @@
 
-
-$(".checkmark").click(function() {
+$(document).on('click', ".checkmark", function () {
     // createCheckMark(this);
     var id = $(this).parent().attr('id');
 
@@ -8,7 +7,7 @@ $(".checkmark").click(function() {
 
     axios.post('/favorite/create/', {
         content_id: id,
-    }).then(function(response) {
+    }).then(function (response) {
         const {
             msg,
             status
@@ -40,7 +39,7 @@ $(".checkmark").click(function() {
             location.reload();
         }, 1000);
 
-    }).catch(function(error) {
+    }).catch(function (error) {
         console.log(error);
     });
 });
