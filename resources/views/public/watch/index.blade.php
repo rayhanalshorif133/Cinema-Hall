@@ -80,15 +80,18 @@
                                 Cast: {{ $content->artist_name }}
                             </p>
                     </div>
-                    @if ($content->is_favourite === false)
-                            <h3 style="color:#e9ecef" id="{{ $content->id }}">Add to Favourite list <a href=""
-                                    style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;" class="checkmark"><i
-                                        class="fas fa-plus"></i></a></h3>
-                    @else
-                    <h3 style="color:#e9ecef" id="{{ $content->id }}">Remove from Favourite list <a href=""
-                      style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;" class="checkmark"><i
-                          class="fas fa-minus"></i></a></h3>
-                    @endif
+                    <div class="col-12">
+                      <h3 style="color:#e9ecef" id="{{ $content->id }}">
+                        {{ $content->is_favorite == 0 ? 'Add to Favourite list' : 'Remove from Favourite list' }}
+                        @php
+                          $icon = $content->is_favorite == 0 ? 'fas fa-plus' : 'fas fa-minus';
+                        @endphp
+                        <a href="" style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"
+                              class="checkmark">
+                              <i class="{{$icon}}"></i>                              
+                            </a>
+                      </h3>
+                    </div>
                 </div>
             </div>
         </section>
@@ -107,7 +110,7 @@
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
                                 <label class="label-check" id="{{ $item->id }}">
-                                    <input type="checkbox">
+                                    <input type="checkbox" @if($item->is_favorite == 1) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                                 <a href="{{ route('watch.index', $item->id) }}">
@@ -157,6 +160,10 @@
             }
         });
     </script>
+
+
+
+
 
 </body>
 

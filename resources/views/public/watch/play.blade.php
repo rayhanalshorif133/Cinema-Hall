@@ -71,12 +71,12 @@
                     </div>
 
                     <div class="col-12">
-                        @if ($content->is_favourite === false)
-                            <h3 style="color:#e9ecef" id="{{ $content->id }}">Add to Favourite list <a href=""
+                        @if ($content->is_favourite == "no")
+                            <h3 style="color:#e9ecef" id="{{ $content->id }}">Add to Favourite list<a href=""
                                     style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"
                                     class="checkmark"><i class="fas fa-plus"></i></a></h3>
                         @else
-                            <h3 style="color:#e9ecef" id="{{ $content->id }}">Remove from Favourite list <a
+                            <h3 style="color:#e9ecef" id="{{ $content->id }}">Remove from Favourite list<a
                                     href=""
                                     style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"
                                     class="checkmark"><i class="fas fa-minus"></i></a></h3>
@@ -89,9 +89,9 @@
         <section id="section_three" style="margin-bottom: 20%;">
             <div class="wrap-three  d-flex justify-content-between mt-3">
                 <div class="title-box">
-                    <h3 style="color: #00f9ff; width: 100%;">Up next
+                    <h3 style="color: #00f9ff; width: 100%;">
+                        Up next
                     </h3>
-
                 </div>
             </div>
             <div id="three_carousel" class="owl-carousel ">
@@ -100,7 +100,7 @@
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
                                 <label class="label-check" id={{ $item->id }}>
-                                    <input type="checkbox">
+                                    <input type="checkbox" @if($item->is_favorite == 1) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                                 <a href="{{ route('watch.index', $item->id) }}">

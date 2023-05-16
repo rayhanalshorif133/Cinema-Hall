@@ -48,12 +48,19 @@ class WatchController extends Controller
                 ->where('id', '!=', $content->id)
                 ->orderBy('id', 'desc')
                 ->get();
+                
+            $favoriteController = new FavoriteController();
+            $ratingController = new RatingController();
+
+            if($content->relatedContents->count() > 0) {
+                foreach ($content->relatedContents as $item) {
+                    $item->is_favorite = $favoriteController->IS_FAVORITE($item->id); 
+                }
+            }
 
             $cat_name = str_replace(' ', '-', strtolower($findCategory->cat_name));
             $content->cat_name = $cat_name;
-            $ratingController = new RatingController();
             $content->rating = $ratingController->GET_CONTENT_RATING($content->id);
-            $favoriteController = new FavoriteController();
             $content->is_favorite = $favoriteController->IS_FAVORITE($content->id);
             return $content;
         }
