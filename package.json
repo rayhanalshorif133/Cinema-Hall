@@ -1,6 +1,7 @@
 {
     "private": true,
     "scripts": {
+        "start": "mix watch",
         "dev": "npm run development",
         "development": "mix",
         "watch": "mix watch",
@@ -16,5 +17,9 @@
         "laravel-mix": "^6.0.6",
         "lodash": "^4.17.19",
         "postcss": "^8.1.14"
+    },
+    "dependencies": {
+        "jquery": "^3.7.0",
+        "toastify-js": "^1.12.0"
     }
 }

@@ -12,13 +12,13 @@
 
             <ul class="navbar-nav bg-transparent fixed-top" id="sidebar-wrapper">
               <li class="nav-item active">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{route('home')}}">
                   &nbsp Home <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="#"> &nbsp Popular</a>
-              </li>
-              <li class="nav-item">
+              </li> --}}
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="#">&nbsp Fan
                   Favourite</a>
               </li>
@@ -27,18 +27,18 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">&nbsp Recomended</a>
-              </li>
+              </li> --}}
 
               <li class="nav-item dropdown">
                 <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown"> &nbsp Category </a>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#"> Movie</a></li>
-                  <li><a class="dropdown-item" href="#"> Video Clip </a></li>
-                  <li><a class="dropdown-item" href="#"> Music </a></li>
-                  <li><a class="dropdown-item" href="#"> Natok </a></li>
+                  @foreach ($categories as $item)
+                  <li><a class="dropdown-item" href="#{{$item->tag}}">{{$item->cat_name}}</a></li>
+                  @endforeach
+                  <li><a class="dropdown-item" href="{{route('category.all')}}">All</a></li>
                 </ul>
               </li>
-              <li class="nav-item dropdown">
+              {{-- <li class="nav-item dropdown">
                 <a class="nav-link  dropdown-toggle" href="#" data-bs-toggle="dropdown">&nbsp Genere</a>
                 <ul class="dropdown-menu">
                   <li><a class="dropdown-item" href="#"> Action</a></li>
@@ -47,8 +47,8 @@
                   <li><a class="dropdown-item" href="#"> Romance </a></li>
                   <li><a class="dropdown-item" href="#"> Thriller </a></li>
                 </ul>
-              </li>
-              <li class="nav-item">
+              </li> --}}
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="#">&nbsp Watchlist</a>
               </li>
               <li class="nav-item">
@@ -56,22 +56,22 @@
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="#">&nbsp Logout</a>
-              </li>
+              </li> --}}
             </ul>
 
           </div>
-          <a class="navbar-brand text-center d-block " href="#">
+          <a class="navbar-brand text-center d-block " href="{{route('home')}}">
 
-            <img src="images/logo.png" style="height: 40px; width: auto;" alt="" title="">
+            <img src="{{asset("assets/images/logo.png")}}" style="height: 40px; width: auto;" alt="" title="">
           </a>
         </div>
         <!-- top-menu-bg -->
       </div>
     </section>
     
-    <!-- mobile-nav-panel -->
+    <!-- pc-nav-panel -->
     <!-- ================= -->
-    @include('layouts._partials.mobile_nav')
+    @include('layouts._partials.pc_nav')
 
     <!--/ Carousel Star /-->
     @include('layouts._partials.slider')

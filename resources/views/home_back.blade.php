@@ -1,6 +1,23 @@
 @extends('layouts.app')
 
 @section('content')
+
+    @foreach ($categories as $category)
+    <section id="section_one">
+        <div class="wrap-one d-flex justify-content-between">
+            <div class="title-box">
+                <h3 class="title-a">
+                    {{$category->cat_name}}
+                </h3>
+            </div>
+            <div class="more-link">
+                <a href="#">see all
+                    <i class="fa fa-arrow-circle-right" aria-hidden="true"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+    @endforeach
     <!--/ Section one Star /-->
     <section id="section_one">
         <div class="wrap-one  d-flex justify-content-between">

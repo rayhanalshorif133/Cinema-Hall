@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,8 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // $data = DB::table('ad_wallpaper_map')->get();
-    // dd('Hello World', $data);
-    return view('welcome');
+
+Route::get('command', function () {
+    Artisan::call('migrate --database="mysql2"');
 });
+
+
+foreach (glob(base_path('routes/public/*.php')) as $route) {
+    require_once $route;
+}
