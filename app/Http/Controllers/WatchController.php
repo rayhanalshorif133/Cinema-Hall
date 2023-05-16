@@ -11,44 +11,36 @@ class WatchController extends Controller
     public function index($content_id = null)
     {
 
-        if($content_id){
-            $content = Content::find($content_id);
-            $findCategory = Category::find($content->cat_id);            
-
-            $_NEED = ['id',
-                'title', 
-                'description', 
-                'prv1_file_name',
-                'prv2_file_name',
-                'details1_file_name',
-                'details2_file_name'];
-
-            $content->relatedContents = Content::select($_NEED)
-                ->where('cat_id', $findCategory->id)
-                ->where('sub_cat_id', $content->sub_cat_id)
-                ->where('id', '!=', $content->id)
-                ->orderBy('id', 'desc')
-                ->get();
-            $cat_name = str_replace(' ', '-', strtolower($findCategory->cat_name));
-            $content->cat_name = $cat_name;
-
+        if ($content_id) {
+            $content = $this->watchContentInfo($content_id);
             return view('public.watch.index', compact('content'));
         }
-        
     }
 
-    public function watchPlay($content_id){
-        if($content_id){
-            $content = Content::find($content_id);
-            $findCategory = Category::find($content->cat_id);            
+    public function watchPlay($content_id)
+    {
+        if ($content_id) {
+            $content = $this->watchContentInfo($content_id);
+            return view('public.watch.play', compact('content'));
+        }
+    }
 
-            $_NEED = ['id',
-                'title', 
-                'description', 
+
+    public function watchContentInfo($content_id)
+    {
+        if ($content_id) {
+            $content = Content::find($content_id);
+            $findCategory = Category::find($content->cat_id);
+
+            $_NEED = [
+                'id',
+                'title',
+                'description',
                 'prv1_file_name',
                 'prv2_file_name',
                 'details1_file_name',
-                'details2_file_name'];
+                'details2_file_name'
+            ];
 
             $content->relatedContents = Content::select($_NEED)
                 ->where('cat_id', $findCategory->id)
@@ -56,10 +48,14 @@ class WatchController extends Controller
                 ->where('id', '!=', $content->id)
                 ->orderBy('id', 'desc')
                 ->get();
+
             $cat_name = str_replace(' ', '-', strtolower($findCategory->cat_name));
             $content->cat_name = $cat_name;
-            return view('public.watch.play', compact('content'));
-
+            $ratingController = new RatingController();
+            $content->rating = $ratingController->GET_CONTENT_RATING($content->id);
+            $favoriteController = new FavoriteController();
+            $content->is_favorite = $favoriteController->IS_FAVORITE($content->id);
+            return $content;
         }
     }
 }

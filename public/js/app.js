@@ -2062,6 +2062,7 @@ module.exports = {
 
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 __webpack_require__(/*! ./favorite */ "./resources/js/favorite.js");
+__webpack_require__(/*! ./rating */ "./resources/js/rating.js");
 
 /***/ }),
 
@@ -2112,23 +2113,11 @@ $(document).on('click', ".checkmark", function () {
   // createCheckMark(this);
   var id = $(this).parent().attr('id');
   console.log("click", id);
-  axios.post('/favorite/create/', {
-    content_id: id
-  }).then(function (response) {
-    var _response$data$data = response.data.data,
-      msg = _response$data$data.msg,
-      status = _response$data$data.status;
-    var color1 = "#00b09b",
-      color2 = "#96c93d";
-    if (status == "added") {
-      color1 = "#00b09b";
-      color2 = "#96c93d";
-    } else {
-      color1 = "#ff5f6d";
-      color2 = "#ffc371";
-    }
+  if (id == undefined) {
+    color1 = "#ff5f6d";
+    color2 = "#ffc371";
     Toastify({
-      text: msg,
+      text: "Id is undefined",
       duration: 3000,
       newWindow: true,
       close: true,
@@ -2142,11 +2131,102 @@ $(document).on('click', ".checkmark", function () {
         background: "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")")
       }
     }).showToast();
-    setTimeout(function () {
-      location.reload();
-    }, 1000);
-  })["catch"](function (error) {
-    console.log(error);
+    return true;
+  } else {
+    axios.post('/favorite/create/', {
+      content_id: id
+    }).then(function (response) {
+      var _response$data$data = response.data.data,
+        msg = _response$data$data.msg,
+        status = _response$data$data.status;
+      var color1 = "#00b09b",
+        color2 = "#96c93d";
+      if (status == "added") {
+        color1 = "#00b09b";
+        color2 = "#96c93d";
+      } else {
+        color1 = "#ff5f6d";
+        color2 = "#ffc371";
+      }
+      Toastify({
+        text: msg,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        // `top` or `bottom`
+        position: "center",
+        // `left`, `center` or `right`
+        stopOnFocus: true,
+        // Prevents dismissing of toast on hover
+        style: {
+          background: "linear-gradient(to right, ".concat(color1, ", ").concat(color2, ")")
+        }
+      }).showToast();
+      setTimeout(function () {
+        location.reload();
+      }, 1000);
+    })["catch"](function (error) {
+      console.log(error);
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/rating.js":
+/*!********************************!*\
+  !*** ./resources/js/rating.js ***!
+  \********************************/
+/***/ (() => {
+
+var errorToast = function errorToast(message) {
+  Toastify({
+    text: message ? message : "Something went wrong",
+    duration: 3000,
+    newWindow: true,
+    close: true,
+    gravity: "top",
+    // `top` or `bottom`
+    position: "center",
+    // `left`, `center` or `right`
+    stopOnFocus: true,
+    // Prevents dismissing of toast on hover
+    style: {
+      background: "linear-gradient(to right, #ff5f6d, #ffc371)"
+    }
+  }).showToast();
+};
+$(document).on('click', "input[name='rating']", function () {
+  var rating = $(this).val();
+  var contentId = $(this).parent().parent().parent().attr('id').split('-')[1];
+  axios.post('/rating/create', {
+    rating: rating,
+    contentId: contentId
+  }).then(function (response) {
+    var _response$data = response.data,
+      status = _response$data.status,
+      message = _response$data.message;
+    if (status === true) {
+      Toastify({
+        text: message,
+        duration: 3000,
+        newWindow: true,
+        close: true,
+        gravity: "top",
+        // `top` or `bottom`
+        position: "center",
+        // `left`, `center` or `right`
+        stopOnFocus: true,
+        // Prevents dismissing of toast on hover
+        style: {
+          color: "#000000",
+          background: "linear-gradient(to right, #00F9FF, #00E0E6)"
+        }
+      }).showToast();
+    } else {
+      errorToast(message);
+    }
   });
 });
 

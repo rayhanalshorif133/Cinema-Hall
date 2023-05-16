@@ -75,4 +75,19 @@ class FavoriteController extends Controller
                 // dd($favorite_contents);
         return view('public.others.favorite_all', compact('favorite_contents'));
     }
+
+    public function IS_FAVORITE($content_id){
+        $findFavorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")->first();
+        if($findFavorite){
+            // $findFavorite to array
+            $updateFavorite = $findFavorite ? json_decode($findFavorite->content_ids) : [];
+            // $updateFavorite to array
+            $updateFavorite = (array) $updateFavorite;
+            // check if content_id is exist in $updateFavorite
+            if(in_array($content_id, $updateFavorite)){
+                return true;
+            }
+        }
+        return true;
+    }
 }
