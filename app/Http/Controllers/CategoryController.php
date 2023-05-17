@@ -4,15 +4,35 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Content;
+use App\Models\FavoriteCategory;
 use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
     public function category_all()
     {
-        $homeController = new HomeController();
-        $categories = $homeController->category_info();
+        $categories = Category::where('parent_id', 0)
+            ->where('type_id', 4)
+            ->where('status', 'published')
+            ->where('type', 'video')
+            ->orderBy('language', 'asc')
+            ->get()
+            ->toArray();
+        foreach ($categories as $key => $category){
+            $category = (object) $category;
+            $category->is_favorite = FavoriteCategory::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")
+                ->where('category_id', $category->id)
+                ->first() ? true : false;
+            $category->tag = str_replace(' ', '', $category->cat_name);
+            $categories[$key] = $category;
+
+        }
         $title = 'Cinema-Hall | All Categories';
+        
+        // orderby is_favorite
+        usort($categories, function ($b,$a) {
+            return $a->is_favorite <=> $b->is_favorite;
+        });
         return view('public.category.all', compact('categories', 'title'));
     }
 
@@ -35,7 +55,6 @@ class CategoryController extends Controller
             }
 
 
-            // dd($sub_categories);
 
 
             // GET CONTENTS
@@ -83,6 +102,25 @@ class CategoryController extends Controller
     }
 
     public function create_favorite(Request $request){
-        return $this->respondWithSuccess("favorite", $request->all());
+
+        $key_id = $this->get_msisdn();
+        if($key_id && $request->categoryID){
+            if($request->status == 'delete'){
+                $favoriteCategory = FavoriteCategory::where('key_id', $key_id)
+                ->where('category_id', $request->categoryID)
+                ->delete();
+                return $this->respondWithSuccess("favorite", $favoriteCategory);
+            }else{
+                $favoriteCategory = FavoriteCategory::updateOrCreate(
+                    ['key_id' => $key_id, 'category_id' => $request->categoryID],
+                    ['key_id' => $key_id, 'category_id' => $request->categoryID]
+                );
+                return $this->respondWithSuccess("favorite", $favoriteCategory);
+            }
+        }else{
+            return $this->respondWithError("Something went wrong");
+        }
+
+
     }
 }

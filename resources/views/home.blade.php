@@ -76,7 +76,6 @@
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
                                 <label class="label-check" id="{{ $item->id }}">
-                                    {{ $item->is_favorite }}
                                     @if ($item->is_favorite == 1)
                                         <input type="checkbox" checked>
                                     @else
