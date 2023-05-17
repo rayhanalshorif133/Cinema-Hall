@@ -21,5 +21,8 @@ Route::prefix('category/')
     ->group(function(){
     Route::get('/all','category_all')->name('all');
     Route::get('/{id?}/{name?}','category_detail')->name('detail');
+
+    // Favorite categories
+    Route::post('/favorite/create','create_favorite')->name('create_favorite');
 });
 

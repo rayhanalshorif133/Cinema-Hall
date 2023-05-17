@@ -26,7 +26,7 @@
     <!-- Custom styles for this template -->
     <link href="{{ asset('assets/dist/animate/animate.min.css') }}" rel="stylesheet">
 
-    <link href="{{ asset('assets/dist/ionicons/css/ionicons.css') }}" rel="stylesheet">
+    {{-- <link href="{{ asset('assets/dist/ionicons/css/ionicons.css') }}" rel="stylesheet"> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons-core.min.css" /> --}}
     {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/4.5.6/css/ionicons.min.css"/> --}}
     <link href="{{ asset('assets/dist/owlcarousel/assets/owl.carousel.css') }}" rel="stylesheet">

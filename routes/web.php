@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('command', function () {
     Artisan::call('migrate --database="mysql2"');
+    dd('Database 2 migration');
 });
 
 

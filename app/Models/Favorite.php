@@ -11,7 +11,7 @@ class Favorite extends Model
 
     protected $connection = 'mysql2';
     protected $table = 'favorites';
-    protected $fillable = ['key_id', 'content_ids'];
+    protected $fillable = ['id','key_id', 'content_ids'];
 
 
     public function get_content_ids($content_ids)

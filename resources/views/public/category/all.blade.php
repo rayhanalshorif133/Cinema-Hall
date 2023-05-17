@@ -27,7 +27,7 @@
             <div class="card-body">
               <label class="label-check">
                 <input type="checkbox">
-                <span class="checkmark"></span>
+                <span class="checkmark categoryCheckMark" id="categoryID-{{$category->id}}"></span>
               </label>
               <a href="/#{{$category->tag}}">
                 <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$key}}" alt="Card image cap ">
@@ -57,6 +57,13 @@
   <script src="{{asset('assets/js/main.js')}}"></script>
   <script>
     $(document).ready(function () {
+      scrollingHandler();
+      favoritesHandler()
+      
+    });
+
+
+    const scrollingHandler = () => {
       $(window).scroll(function (e) {
         $el = $('.nav-top-item');
         if ($(this).scrollTop() > 30) {
@@ -65,7 +72,21 @@
           $('.nav-top-item').removeClass("fixedNav");
         }
       });
-    });
+    };
+
+    function favoritesHandler(){
+      $(".categoryCheckMark").on("click", function(){
+        var categoryID = $(this).attr("id").split("-")[1];
+        axios.post('/category/favorite/create',{
+          categoryID: categoryID
+        }).then(function(response){
+          var data = response.data.data;
+          console.log(data);
+        }).catch(function(error){
+          console.log(error);
+        })
+      });
+    }
   </script>
 
 </body>

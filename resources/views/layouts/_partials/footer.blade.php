@@ -31,3 +31,7 @@
     </div>
   </footer>
   <div id="preloader"></div>
+
+  {{-- axios cdn --}}
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  {{-- sweetalert2 cdn --}}

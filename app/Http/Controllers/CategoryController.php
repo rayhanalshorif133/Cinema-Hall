@@ -52,6 +52,7 @@ class CategoryController extends Controller
             ];
 
 
+            $favoriteController = new FavoriteController();
             foreach ($sub_categories as $key => $sub_category) {
                 if( $subCatFlag){
                     $sub_categories[$key]->contents = Content::select($_NEED_CONTENT)
@@ -67,6 +68,11 @@ class CategoryController extends Controller
                     ->orderBy('id', 'desc')
                     ->get();
                 }
+
+                foreach ($sub_categories[$key]->contents as $item) {
+                    $item->is_favorite = $favoriteController->IS_FAVORITE($item->id);
+                }
+
             }
 
             $name = str_replace('-', ' ', $name);
@@ -74,5 +80,9 @@ class CategoryController extends Controller
 
             return view('public.category.details', compact('category_id', 'sub_categories', 'name'));
         }
+    }
+
+    public function create_favorite(Request $request){
+        return $this->respondWithSuccess("favorite", $request->all());
     }
 }

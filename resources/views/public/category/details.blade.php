@@ -53,7 +53,7 @@
           <div class="card-box-a card-shadow">
             <div class="card-body">
               <label class="label-check" id="{{$content->id}}">
-                <input type="checkbox">
+                <input type="checkbox" @if($content->is_favorite == 1) checked @endif>
                 <span class="checkmark"></span>
               </label>
               <a href="{{route('watch.index',$content->id)}}">
