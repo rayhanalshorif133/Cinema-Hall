@@ -75,11 +75,13 @@ Route::prefix('watch/')
 });
 
 // search
+
 Route::prefix('search/')
     ->name('search.')
     ->controller(SearchController::class)
     ->group(function(){
-    Route::get('/{keyword?}','search')->name('index');
+    Route::get('/{keyword?}','index')->name('index');
+    Route::post('/keyword','search')->name('keyword');
 });
 
 // foreach (glob(base_path('routes/public/*.php')) as $route) {

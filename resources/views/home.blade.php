@@ -52,6 +52,7 @@
             // lowercase
             $category->see_all = str_replace(' ', '-', strtolower($category->cat_name));
         @endphp
+        @if(count($category->contents) > 0)
         <section id="section_one"
             @if ($isLast == true) style="margin-bottom: 15%;" @else style="margin-bottom: 2%;" @endif>
             <div class="wrap-one d-flex justify-content-between">
@@ -94,6 +95,7 @@
                 @endforeach
             </div>
         </section>
+        @endif
     @endforeach
 @endsection
 

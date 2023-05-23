@@ -162,9 +162,6 @@
 
   $(".searchBtn").click(function () {
     $("#searchModal").modal('hide');
-    var inputValue = $(this).siblings("#searchInput").val();
-    console.log(inputValue);
-
   });
 
 

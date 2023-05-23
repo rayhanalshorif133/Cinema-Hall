@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row row-cols-3 row-cols-sm-3 justify-content-center">
                 <div class="col-2 col-sm-1 text-left">
-                    <a href="{{ route('watch.index', [$content->id]) }}">
+                    <a href="{!! URL::previous() !!}">
                         <img src="{{ asset('assets/images/top-left-arrow.png') }}" class="img-fluid">
                     </a>
                 </div>

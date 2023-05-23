@@ -11,7 +11,9 @@
                     </a>
                 </div>
                 <div class="col-8 col-sm-10 text-center">
-                    <h2 style="color: #00f9ff; text-align: center; font-size: 1.8rem;">Your Favourite</h2>
+                    <h2 style="color: #00f9ff; text-align: center; font-size: 1.8rem;">
+                        Search Result
+                    </h2>
                 </div>
                 <div class="col-2 col-sm-1 text-center">
                 </div>
@@ -22,13 +24,15 @@
         <!--/ Section Three Star /-->
         <section id="section_three" style="margin-bottom: 20%;">
             <div class="row">
-                @foreach ($favorite_contents as $content)
+                @foreach ($contents as $content)
                     <div class="card-box-a card-shadow col-md-4">
                         <div class="card-body">
+                            @if($content->is_favorite == 1)
                             <label class="fvrt-label-check" id="{{$content->id}}">
-                                <input type="checkbox" checked>
+                                <input type="checkbox">
                                 <span class="checkmark"></span>
                             </label>
+                            @endif
                             <a href="{{ route('watch.index', $content->id) }}">
                                 <img class="card-img-top cover img-responsive"
                                     src="{{$content->img($content->id)}}" alt="Card image cap ">

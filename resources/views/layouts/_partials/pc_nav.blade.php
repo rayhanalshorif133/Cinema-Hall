@@ -23,12 +23,9 @@
               @endphp
               <li><a class="dropdown-item" href="{{ route('category.detail', [$item->id, $url]) }}">{{$item->cat_name}}</a></li>
               @endforeach
-              <li><a class="dropdown-item" href="{{route('category.all')}}">All</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">&nbsp Logout</a>
-          </li>
+          
         </ul>
 
       </div>

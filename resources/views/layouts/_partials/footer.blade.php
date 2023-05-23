@@ -9,13 +9,16 @@
         <div class="modal-content bg_modal text-white">
             <div class="modal-body">
                 {{-- input --}}
-                <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username"
-                        aria-describedby="button-addon2" id="searchInput">
-                    <button class="btn btn-outline-secondary searchBtn" type="button" id="button-addon2">
-                      <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                <form action="{{route('search.keyword')}}" method="post">
+                    @csrf
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Search" aria-label="Recipient's username"
+                            aria-describedby="button-addon2" id="searchInput" name="searchInput">
+                        <button class="btn btn-outline-secondary searchBtn" type="submit" id="button-addon2">
+                          <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
