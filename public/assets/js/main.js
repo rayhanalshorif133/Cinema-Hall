@@ -152,10 +152,20 @@
   });
 
 
-  
+  $(".search_icon").click(function () {
+    $("#searchInput").val("");
+    $("#searchModal").modal('show');
+  });
+  $(".btn-close").click(function () {
+    $("#searchModal").modal('hide');
+  });
 
+  $(".searchBtn").click(function () {
+    $("#searchModal").modal('hide');
+    var inputValue = $(this).siblings("#searchInput").val();
+    console.log(inputValue);
 
-
+  });
 
 
 })(jQuery);

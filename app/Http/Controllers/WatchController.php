@@ -13,6 +13,7 @@ class WatchController extends Controller
 
         if ($content_id) {
             $content = $this->watchContentInfo($content_id);
+
             return view('public.watch.index', compact('content'));
         }
     }
@@ -21,6 +22,7 @@ class WatchController extends Controller
     {
         if ($content_id) {
             $content = $this->watchContentInfo($content_id);
+            // dd($content);
             return view('public.watch.play', compact('content'));
         }
     }
@@ -52,9 +54,14 @@ class WatchController extends Controller
             $favoriteController = new FavoriteController();
             $ratingController = new RatingController();
 
+            
+            $getName = ucwords($findCategory->cat_name);
+            $image_url = str_replace('-', '_', $getName);
+
             if($content->relatedContents->count() > 0) {
                 foreach ($content->relatedContents as $item) {
                     $item->is_favorite = $favoriteController->IS_FAVORITE($item->id); 
+                    $item->img = $item->img($item->id);
                 }
             }
 
@@ -62,6 +69,7 @@ class WatchController extends Controller
             $content->cat_name = $cat_name;
             $content->rating = $ratingController->GET_CONTENT_RATING($content->id);
             $content->is_favorite = $favoriteController->IS_FAVORITE($content->id);
+            $content->img = $content->img($content->id);
             return $content;
         }
     }

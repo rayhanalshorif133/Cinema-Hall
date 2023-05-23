@@ -90,6 +90,24 @@ class CategoryController extends Controller
 
                 foreach ($sub_categories[$key]->contents as $item) {
                     $item->is_favorite = $favoriteController->IS_FAVORITE($item->id);
+                    // capitalize
+                    $getName = ucwords($name);
+                    $image_url = str_replace('-', '_', $getName);
+
+                    // if _ exist
+                    if (strpos($image_url, '_') !== false) {
+                        // get next char after _
+                        $pos = strpos($image_url, '_');
+                        $next_word = substr($image_url, $pos + 1);
+                        $next_word = ucfirst($next_word);
+                        $image_url = substr($image_url, 0, $pos);
+                        $image_url = $image_url . '_'. $next_word;
+
+                    }
+
+                    $image_url = 'http://b2mcms.b2mwap.com/upload/content/Video/' . $image_url;
+                    $prv_name = $item->prv1_file_name? $item->prv1_file_name : $item->prv2_file_name;
+                    $item->img = $image_url . '/' . $prv_name;
                 }
 
             }

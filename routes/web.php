@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WatchController;
+use App\Http\Controllers\SearchController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -22,15 +24,15 @@ use App\Http\Controllers\WatchController;
 
 
 Route::get('/clear', function () {
-    // Artisan::call('view:clear');
-    // Artisan::call('cache:clear');
-    // Artisan::call('route:clear');
-    // Artisan::call('config:clear');
-    // Artisan::call('optimize:clear');
-    // Artisan::call('config:cache');
-    // Artisan::call('optimize');
+    Artisan::call('view:clear');
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('optimize:clear');
+    Artisan::call('config:cache');
+    Artisan::call('optimize');
     Artisan::call('route:cache');
-    return 'Clear';
+    return 'clear';
 });
 
 Route::get('/',[HomeController::class,'index'])->name('home');
@@ -70,6 +72,14 @@ Route::prefix('watch/')
     ->group(function(){
     Route::get('/{content_id?}','index')->name('index');
     Route::get('/{content_id}/play','watchPlay')->name('play');
+});
+
+// search
+Route::prefix('search/')
+    ->name('search.')
+    ->controller(SearchController::class)
+    ->group(function(){
+    Route::get('/{keyword?}','search')->name('index');
 });
 
 // foreach (glob(base_path('routes/public/*.php')) as $route) {

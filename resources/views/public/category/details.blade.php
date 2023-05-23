@@ -25,29 +25,7 @@
       <h4 class="text-white px-2 m-2">{{$sub_category->cat_name}}</h4>
       <div id="{{$sub_categoryKey}}_carousel" class="owl-carousel">
 
-        @if($sub_category->contents->count() == 0)
-        @for ($index = 0; $index < 4; $index++)
-        @php
-          $rand = rand(1, 1000);
-        @endphp
-        <div class="carousel-item-b">
-          <div class="card-box-a card-shadow">
-            <div class="card-body">
-              <label class="label-check">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-              </label>
-              <a href="/dlskvcksdamkl">
-                <img class="card-img-top cover img-responsive" src="https://picsum.photos/500/300?random={{$rand}}" alt="Card image cap ">
-                <p class="card-text text-center text-white mt-2">
-                  No Content Found
-                </p>
-              </a>
-            </div>
-          </div>
-        </div>
-        @endfor
-        @else
+        @if($sub_category->contents->count() > 0)
         @foreach ($sub_category->contents as $contentKey => $content)
         <div class="carousel-item-b">
           <div class="card-box-a card-shadow">
@@ -57,17 +35,7 @@
                 <span class="checkmark"></span>
               </label>
               <a href="{{route('watch.index',$content->id)}}">
-                @php
-                  $rand = rand(1, 1000);
-                  if($content->prv1_file_name){
-                    $img = asset('storage/'.$content->prv1_file_name);
-                  }else if($content->prv2_file_name){
-                    $img = asset('storage/'.$content->prv2_file_name);
-                  }else{
-                    $img = 'https://picsum.photos/500/300?random='.$rand;
-                  }
-                @endphp
-                <img class="card-img-top cover img-responsive" src="{{$img}}" alt="Card image cap ">
+                <img class="card-img-top cover img-responsive" src="{{$content->img}}" alt="Card image cap ">
                 <p class="card-text text-center text-white mt-2">
                   {{$content->title}}
                 </p>

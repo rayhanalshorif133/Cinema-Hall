@@ -5,7 +5,8 @@
         <div class="container-fluid">
             <div class="row row-cols-3 row-cols-sm-3 justify-content-center">
                 <div class="col-2 col-sm-1 text-left">
-                    <a href="{{ route('home') }}">
+
+                    <a href="{!! URL::previous() !!}">
                         <img src="{{ asset('assets/images/top-left-arrow.png') }}" class="img-fluid">
                     </a>
                 </div>
@@ -28,13 +29,9 @@
                                 <input type="checkbox" checked>
                                 <span class="checkmark"></span>
                             </label>
-                            @php
-                                $rand = rand(1, 1000);
-                                $img = ($content->prv1_file_name ? asset('storage/' . $content->prv1_file_name) : $content->prv2_file_name) ? asset('storage/' . $content->prv2_file_name) : 'https://picsum.photos/500/300?random=' . $rand;
-                            @endphp
                             <a href="{{ route('watch.index', $content->id) }}">
                                 <img class="card-img-top cover img-responsive"
-                                    src="{{$img}}" alt="Card image cap ">
+                                    src="{{$content->img($content->id)}}" alt="Card image cap ">
                                 <p class="card-text text-center">
                                     <span class="card-text-a">{{ $content->title }}</span>
                                 </p>

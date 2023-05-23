@@ -19,13 +19,10 @@
 
     <main role="main">
         <section id="watchVide">
-            @php
-                $video_file_path = $content->con1_file_name ? $content->con1_file_name : $content->con2_file_name;
-            @endphp
             <video width="100%" controls>
-                <source src="{{ asset('storage/' . $video_file_path) }}" type="video/mp4">
+                <source src="{{$content->video($content->id)}}" type="video/mp4">
                 Your browser does not support HTML video.
-                <a href="{{ asset('storage/' . $video_file_path) }}">
+                <a href="{{$content->video($content->id)}}">
                     download the MP4
                 </a>
                 and watch it with your favorite video player!
@@ -105,7 +102,7 @@
                                 </label>
                                 <a href="{{ route('watch.index', $item->id) }}">
                                     <img class="card-img-top cover img-responsive"
-                                        src="{{ asset('storage/' . $item->prv1_file_name) }}" alt="Card image cap ">
+                                        src="{{$item->img }}" alt="Card image cap ">
                                     <p class="card-text text-center">
                                         {{ $item->title }}
                                     </p>

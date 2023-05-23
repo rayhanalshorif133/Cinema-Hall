@@ -20,8 +20,8 @@
     <main role="main">
         <section id="watchVide">
             <div class="wrapper">
-                <img id="video-cover" src="{{ asset('storage/' . $content->prv1_file_name) }}" alt="Video title"
-                    class="img-fluid" style="width:100%; margin: 0 auto;">
+                <img id="video-cover" src="{{ $content->img }}" alt="Video title" class="img-fluid"
+                    style="width:100%; margin: 0 auto;">
 
                 {{-- <iframe id="video" width="100%" height="auto" src="https://www.youtube.com/embed/d7lCZ0rpH3o" frameborder="0"
           allow="autoplay; encrypted-media" allowfullscreen>
@@ -81,16 +81,17 @@
                             </p>
                     </div>
                     <div class="col-12">
-                      <h3 style="color:#e9ecef" id="{{ $content->id }}">
-                        {{ $content->is_favorite == 0 ? 'Add to Favourite list' : 'Remove from Favourite list' }}
-                        @php
-                          $icon = $content->is_favorite == 0 ? 'fas fa-plus' : 'fas fa-minus';
-                        @endphp
-                        <a href="" style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"
-                              class="checkmark">
-                              <i class="{{$icon}}"></i>                              
+                        <h3 style="color:#e9ecef" id="{{ $content->id }}">
+                            {{ $content->is_favorite == 0 ? 'Add to Favourite list' : 'Remove from Favourite list' }}
+                            @php
+                                $icon = $content->is_favorite == 0 ? 'fas fa-plus' : 'fas fa-minus';
+                            @endphp
+                            <a href=""
+                                style="color: #00f9ff; font-size: 16px; background-color: #000000; padding: 1%;"
+                                class="checkmark">
+                                <i class="{{ $icon }}"></i>
                             </a>
-                      </h3>
+                        </h3>
                     </div>
                 </div>
             </div>
@@ -104,19 +105,19 @@
 
                 </div>
             </div>
-            <div id="three_carousel" class="owl-carousel ">
+            <div id="next_item_carousel" class="owl-carousel ">
                 @foreach ($content->relatedContents as $item)
                     <div class="carousel-item-b">
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
                                 <label class="label-check" id="{{ $item->id }}">
-                                    <input type="checkbox" @if($item->is_favorite == 1) checked @endif>
+                                    <input type="checkbox" @if ($item->is_favorite == 1) checked @endif>
                                     <span class="checkmark"></span>
                                 </label>
                                 <a href="{{ route('watch.index', $item->id) }}">
-                                    <img class="card-img-top cover img-responsive"
-                                        src="{{ asset('storage/' . $item->prv1_file_name) }}" alt="Card image cap ">
-                                    <p class="card-text text-center">
+                                    <img class="card-img-top cover img-responsive" src="{{ $item->img }}"
+                                        alt="Card image cap ">
+                                    <p class="card-text text-center text-white">
                                         {{ $item->title }}
                                     </p>
                                 </a>
@@ -159,11 +160,26 @@
                 document.getElementById('video-cover').style.display = 'none';
             }
         });
+
+        $(`#next_item_carousel`).owlCarousel({
+            loop: true,
+            margin: 10,
+            responsive: {
+                0: {
+                    items: 1,
+                },
+                576: {
+                    items: 2,
+                },
+                769: {
+                    items: 3,
+                },
+                992: {
+                    items: 4,
+                },
+            },
+        });
     </script>
-
-
-
-
 
 </body>
 

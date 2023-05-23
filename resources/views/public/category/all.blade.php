@@ -23,6 +23,9 @@
             <div class="row">
                 @foreach ($categories as $key => $category)
                     <div class="col-md-3">
+                        @php
+                        $url = str_replace(' ', '-', strtolower($category->cat_name));
+                    @endphp
                         <div class="card-box-a card-shadow">
                             <div class="card-body">
 
@@ -35,7 +38,7 @@
                                     <span class="checkmark categoryCheckMark"
                                         id="categoryID-{{ $category->id }}"></span>
                                 </label>
-                                <a href="/#{{ $category->tag }}">
+                                <a href="{{ route('category.detail', [$category->id, $url]) }}">
                                     <img class="card-img-top cover img-responsive"
                                         src="https://picsum.photos/500/300?random={{ $key }}"
                                         alt="Card image cap ">

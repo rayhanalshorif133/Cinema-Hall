@@ -42,12 +42,15 @@ class HomeController extends Controller
             ->get();
 
         foreach ($categories as $key => $item) {
-            $contents = Content::select('id', 'title', 'description')
+            $contents = Content::select('id', 'title', 'description','prv1_file_name','prv2_file_name','details1_file_name','details2_file_name')
                 ->where('cat_id', $item->id)
                 ->where('type', 'video')
                 ->orderBy('id', 'desc')
                 ->limit(5)
                 ->get();
+                $image_url = str_replace(' ', '_', $item->cat_name);
+                $image_url = 'http://b2mcms.b2mwap.com/upload/content/Video/' . $image_url;
+
             if ($contents->count() > 0) {
                 $favorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")->first();
                 $contentIds = $favorite ? $favorite->get_content_ids($favorite->content_ids) : [];
@@ -57,6 +60,8 @@ class HomeController extends Controller
                     } else {
                         $content->is_favorite = false;
                     }
+                    $prv_name = $content->prv1_file_name? $content->prv1_file_name : $content->prv2_file_name;
+                    $content->img = $image_url . '/' . $prv_name;
                 }
                 $categories[$key]->contents = $contents;
             }else{
