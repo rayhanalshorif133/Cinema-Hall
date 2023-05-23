@@ -83,11 +83,21 @@
                                     @endif
                                     <span class="checkmark"></span>
                                 </label>
+                                @php
+                                $rand = rand(1, 1000);
+                                if($item->prv1_file_name){
+                                  $img = asset('storage/'.$item->prv1_file_name);
+                                }else if($item->prv2_file_name){
+                                  $img = asset('storage/'.$item->prv2_file_name);
+                                }else{
+                                  $img = 'https://picsum.photos/500/300?random='.$rand;
+                                }
+                              @endphp
                                 <a href="{{ route('watch.index', [$item->id]) }}">
                                     <img class="card-img-top cover img-responsive"
-                                        src="https://picsum.photos/500/300?random={{ $rendom }}"
+                                        src="{{ $img }}"
                                         alt="Card image cap ">
-                                    <p class="card-text text-center text-white mt-2">{{ $item->title }}</p>
+                                    <p class="card-text text-center text-white mt-2">{{ $item->title }} dsffvsd</p>
                                 </a>
                             </div>
                         </div>

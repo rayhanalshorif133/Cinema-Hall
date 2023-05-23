@@ -3,7 +3,6 @@ $(document).on('click', ".checkmark", function () {
     // createCheckMark(this);
     var id = $(this).parent().attr('id');
 
-    console.log("click", id);
 
     if (id == undefined) {
         color1 = "#ff5f6d";
@@ -24,7 +23,7 @@ $(document).on('click', ".checkmark", function () {
     } else {
 
 
-        axios.post('/favorite/create/', {
+        axios.post('/favorite/create', {
             content_id: id,
         }).then(function (response) {
             const {

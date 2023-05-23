@@ -13,6 +13,7 @@ class HomeController extends Controller
     {
         $favorite = Favorite::where('key_id', $this->get_msisdn() ? $this->get_msisdn() : "0")  
         ->first();
+     
         $categories = $this->category_info();
         $favoriteContents = "";
         if($favorite){

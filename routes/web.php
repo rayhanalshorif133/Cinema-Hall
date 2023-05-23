@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FavoriteController;
+use App\Http\Controllers\RatingController;
+use App\Http\Controllers\WatchController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,12 +20,58 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('command', function () {
-    Artisan::call('migrate --database="mysql2"');
-    dd('Database 2 migration');
+
+Route::get('/clear', function () {
+    // Artisan::call('view:clear');
+    // Artisan::call('cache:clear');
+    // Artisan::call('route:clear');
+    // Artisan::call('config:clear');
+    // Artisan::call('optimize:clear');
+    // Artisan::call('config:cache');
+    // Artisan::call('optimize');
+    Artisan::call('route:cache');
+    return 'Clear';
 });
 
+Route::get('/',[HomeController::class,'index'])->name('home');
+// category
+Route::prefix('category/')
+    ->name('category.')
+    ->controller(CategoryController::class)
+    ->group(function(){
+    Route::get('/all','category_all')->name('all');
+    Route::get('/{id?}/{name?}','category_detail')->name('detail');
 
-foreach (glob(base_path('routes/public/*.php')) as $route) {
-    require_once $route;
-}
+    // Favorite categories
+    Route::post('/favorite/create','create_favorite')->name('create_favorite');
+});
+
+// favorite
+Route::prefix('favorite')
+    ->name('favorite.')
+    ->controller(FavoriteController::class)
+    ->group(function(){
+    Route::post('/create','create')->name('create');
+    Route::get('/see-more','showAllFavorite')->name('show-all-favorite');
+});
+
+// rating
+Route::prefix('rating/')
+    ->name('rating.')
+    ->controller(RatingController::class)
+    ->group(function(){
+    Route::post('create','create')->name('create');
+});
+
+// watch
+Route::prefix('watch/')
+    ->name('watch.')
+    ->controller(WatchController::class)
+    ->group(function(){
+    Route::get('/{content_id?}','index')->name('index');
+    Route::get('/{content_id}/play','watchPlay')->name('play');
+});
+
+// foreach (glob(base_path('routes/public/*.php')) as $route) {
+//     require_once $route;
+// }

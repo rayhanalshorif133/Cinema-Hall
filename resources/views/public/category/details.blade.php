@@ -59,9 +59,13 @@
               <a href="{{route('watch.index',$content->id)}}">
                 @php
                   $rand = rand(1, 1000);
-                  $img = $content->prv1_file_name ? asset('storage/'.$content->prv1_file_name) : 
-                  $content->prv2_file_name ? asset('storage/'.$content->prv2_file_name) :
-                  'https://picsum.photos/500/300?random='.$rand;
+                  if($content->prv1_file_name){
+                    $img = asset('storage/'.$content->prv1_file_name);
+                  }else if($content->prv2_file_name){
+                    $img = asset('storage/'.$content->prv2_file_name);
+                  }else{
+                    $img = 'https://picsum.photos/500/300?random='.$rand;
+                  }
                 @endphp
                 <img class="card-img-top cover img-responsive" src="{{$img}}" alt="Card image cap ">
                 <p class="card-text text-center text-white mt-2">
