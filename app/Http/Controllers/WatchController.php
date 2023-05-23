@@ -22,7 +22,6 @@ class WatchController extends Controller
     {
         if ($content_id) {
             $content = $this->watchContentInfo($content_id);
-            // dd($content);
             return view('public.watch.play', compact('content'));
         }
     }

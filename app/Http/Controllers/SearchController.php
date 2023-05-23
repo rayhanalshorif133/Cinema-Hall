@@ -12,5 +12,6 @@ class SearchController extends Controller
     public function search($keyword)
     {
         dd($keyword);
+        return view('public.others.search', compact('favorite_contents'));
     }
 }
