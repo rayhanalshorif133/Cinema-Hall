@@ -1,0 +1,4 @@
+INSERT INTO `subscribers` (`id`, `msisdn`, `rmsisdn`, `opr`, `channel`, `status`, `service`, `sub_service`, `subs_date`, `unsubs_date`, `charge_status`, `charge_date`, `shortcode`, `entry`, `last_update`, `in_msg_id`, `zoneid`, `flag`, `tid`) VALUES
+(1772657,	'576829338005007122',	'',	'gp',	'Portal',	'1',	'MFC',	NULL,	'2023-10-04 10:52:01',	NULL,	NULL,	'2023-10-04',	'5656',	'2023-10-04 10:52:01',	'2023-10-04 00:00:00',	NULL,	'',	NULL,	NULL),
+(1772656,	'8801913856588',	'',	'blink',	'portal',	'0',	'MFC',	'-',	'2023-09-27 17:58:25',	'2023-09-27 17:58:44',	NULL,	NULL,	'25656',	'2023-09-27 17:58:25',	'2023-09-27 17:58:44',	NULL,	'',	NULL,	NULL),
+(1772655,	'8801913746963',	'',	'blink',	'Portal',	'1',	'MFC',	'-',	'2023-10-17 04:45:25',	'2023-10-16 19:12:14',	NULL,	'2023-10-17',	'5656',	'2023-10-17 04:45:25',	'2023-10-17 00:00:00',	NULL,	'',	NULL,	NULL);
