@@ -23,6 +23,10 @@ use App\Http\Controllers\HitLogController;
 |
 */
 
+Route::get('/migrate2', function () {
+    Artisan::call('migrate:fresh --database=mysql2');
+    return 'migration done db 2';
+});
 
 
 Route::get('/clear', function () {
@@ -95,6 +99,7 @@ Route::name('subscription.')
         Route::get('cancel-confirmation', [SubscriptionController::class, 'subscriberCancelConfirmation'])->name('cancel-confirmation');
         Route::get('cancel-confirmed', [SubscriptionController::class, 'subscriberCancelConfirmed'])->name('cancel-confirmed');
     });
+    
 
 // hit log
 Route::post('/hit-log',[HitLogController::class,'hitLog'])->name('hitLog');

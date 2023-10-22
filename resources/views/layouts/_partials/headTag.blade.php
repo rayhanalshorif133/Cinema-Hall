@@ -8,8 +8,10 @@
     <meta name="author" content="">
     <link rel="icon" href="{{asset('icon.png')}}">
 
+
     <title>
-        @if ($title)
+
+        @isset($title)
             {{ $title }}
         @else
             Cinema-Hall
@@ -35,6 +37,6 @@
     <link href="{{ asset('css/common.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
-
+    {{-- <script src="https://cdn.tailwindcss.com"></script> --}}
     @stack('styles')
 </head>

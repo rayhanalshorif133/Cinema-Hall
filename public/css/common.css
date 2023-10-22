@@ -584,21 +584,13 @@
 }
 
 /* 10px */
-.mt-2.5{
-    margin-top: 0.625rem
-}
+
 
 /* 12px */
 .mt-3 {
     margin-top: 0.75rem
 }
-/* 14px */
 
-.mt-3.5 {
-    margin-top: 0.875rem
-}
-
-/* 16px */
 .mt-4 {
     margin-top: 1rem
 }
@@ -707,4 +699,16 @@
     justify-content: space-between;
     display: flex;    
  } */
+
+.mt-\[10rem\] {
+    margin-top: 10rem;
+}
+
+@media (min-width: 992px)
+{
+    #pc-nav-panel{
+        display:none;
+    }
+}
+ 
 

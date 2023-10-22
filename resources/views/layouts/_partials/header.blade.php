@@ -20,7 +20,7 @@
                                 Category </a>
                             <ul class="dropdown-menu">
                                 @foreach ($categories as $item)
-                                    {{-- category/12/bangla-movie --}}
+                                
                                     @php
                                         $url = str_replace(' ', '-', strtolower($item->cat_name));
                                     @endphp

@@ -4,15 +4,19 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Subscriber;
+use Illuminate\Support\Facades\Http;
 
 class SubscriptionController extends Controller
 {
     public function subscriberConfirmation()
     {
+
+        $homeController = new HomeController();
+        $categories = $homeController->category_info();
         $phone = $this->get_msisdn();
 
         $isSubscriber = Subscriber::select()
-            ->where('msisdn', $this->get_msisdn())
+            ->where('msisdn', $phone)
             ->where('status', 1)
             ->first();
         if ($isSubscriber) {
@@ -20,7 +24,7 @@ class SubscriptionController extends Controller
             return redirect()->route('home');
         }
 
-        return view('subscribe.confirmation', compact('phone'));
+        return view('public.subscribe.confirmation', compact('categories','phone'));
     }
 
     public function subscriberConfirmed()
@@ -38,6 +42,14 @@ class SubscriptionController extends Controller
                 ]);
             }
         } else {
+            Http::get('http://127.0.0.1:8000/api/subscriber-info/send?service_key=CH&msisdn=01323174104');
+
+
+            $getSubscriberInfo = Http::get('http://127.0.0.1:8000/api/subscriber-notification');
+
+            dd($getSubscriberInfo->json());
+
+
             Subscriber::create([
                 'msisdn' => $this->get_msisdn(),
                 'opr' => $this->get_opr(),
@@ -47,6 +59,8 @@ class SubscriptionController extends Controller
                 'modified' => now()->format('Y-m-d H:i:s'),
             ]);
         }
+       
+
         return view('subscribe.confirmed');
     }
 
