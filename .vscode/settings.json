@@ -2,5 +2,11 @@
     "git.ignoreLimitWarning": true,
     "cSpell.words": [
         "msisdn"
+    ],
+    "cSpell.ignoreWords": [
+        "rmsisdn",
+        "shortcode",
+        "unsubs",
+        "zoneid"
     ]
 }
