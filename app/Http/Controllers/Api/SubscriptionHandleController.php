@@ -12,11 +12,11 @@ class SubscriptionHandleController extends Controller
         return $this->respondWithSuccess("data", $request->all());
     }
     
-    public function subscriberNotification(){
+    public function subscriberNotification(Request $request){
         $data = [
-            'msisdn' => '+8801323174104',
+            'msisdn' => $request->msisdn,
             'opr' => 'GP',
-            'service' => 'CH',
+            'service' => $request->service_key,
             'sub_service' => null,
             'channel' => 'yznx',	
             'push_date' => '2023-10-21',	

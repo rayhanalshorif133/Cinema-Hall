@@ -20,8 +20,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-// http://localhost:3000/api/subscriber-info/send?service_key=CH&msisdn=01323174104
-Route::get('subscriber-info/send', [SubscriptionHandleController::class, 'subscriberInfoSend'])->name('subscriber-info.send');
+// http://localhost:3000/api/subscriber-info/send
+// Route::get('subscriber-info/send', [SubscriptionHandleController::class, 'subscriberInfoSend'])->name('subscriber-info.send');
 
-// http://localhost:3000/api/subscriber-notification
+// http://localhost:3000/api/subscriber-notification?service_key=CH&msisdn=01323174104
 Route::get('subscriber-notification', [SubscriptionHandleController::class, 'subscriberNotification'])->name('subscriber-notification');

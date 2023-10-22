@@ -42,10 +42,9 @@ class SubscriptionController extends Controller
                 ]);
             }
         } else {
-            Http::get('http://127.0.0.1:8000/api/subscriber-info/send?service_key=CH&msisdn=01323174104');
 
 
-            $getSubscriberInfo = Http::get('http://127.0.0.1:8000/api/subscriber-notification');
+            $getSubscriberInfo = Http::get('/api/subscriber-notification?service_key=CH&msisdn=01323174104');
 
             dd($getSubscriberInfo->json());
             
