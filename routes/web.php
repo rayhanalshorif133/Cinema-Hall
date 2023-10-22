@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WatchController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\HitLogController;
 
 
 /*
@@ -84,6 +85,5 @@ Route::prefix('search/')
     Route::post('/keyword','search')->name('keyword');
 });
 
-// foreach (glob(base_path('routes/public/*.php')) as $route) {
-//     require_once $route;
-// }
+// hit log
+Route::post('/hit-log',[HitLogController::class,'hitLog'])->name('hitLog');

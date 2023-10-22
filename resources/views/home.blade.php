@@ -111,6 +111,22 @@
 
 @push('scripts')
     <script>
+
+        $(function(){
+
+            const data = {
+                height: $(window).height(),
+                width: $(window).width(),
+            }
+
+
+            axios.post('/hit-log',data)
+            .then(function(response){
+                console.log(response.data);
+            })
+
+        });
+
         var countOfCategories = {{ count($categories) }};
         for (let index = 0; index < countOfCategories; index++) {
             $(`#${index}_carousel`).owlCarousel({

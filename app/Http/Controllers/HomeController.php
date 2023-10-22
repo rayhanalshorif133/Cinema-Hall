@@ -73,4 +73,7 @@ class HomeController extends Controller
         return $categories;
     }
 
+
+   
+
 }
