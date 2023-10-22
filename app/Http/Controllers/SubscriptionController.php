@@ -48,8 +48,7 @@ class SubscriptionController extends Controller
             $getSubscriberInfo = Http::get('http://127.0.0.1:8000/api/subscriber-notification');
 
             dd($getSubscriberInfo->json());
-
-
+            
             Subscriber::create([
                 'msisdn' => $this->get_msisdn(),
                 'opr' => $this->get_opr(),
