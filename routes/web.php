@@ -8,6 +8,7 @@ use App\Http\Controllers\FavoriteController;
 use App\Http\Controllers\RatingController;
 use App\Http\Controllers\WatchController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\HitLogController;
 
 
@@ -84,6 +85,16 @@ Route::prefix('search/')
     Route::get('/{keyword?}','index')->name('index');
     Route::post('/keyword','search')->name('keyword');
 });
+
+// subscription
+Route::name('subscription.')
+    ->prefix('subscription/')
+    ->group(function () {
+        Route::get('confirmation', [SubscriptionController::class, 'subscriberConfirmation'])->name('confirmation');
+        Route::get('confirmed', [SubscriptionController::class, 'subscriberConfirmed'])->name('confirmed');
+        Route::get('cancel-confirmation', [SubscriptionController::class, 'subscriberCancelConfirmation'])->name('cancel-confirmation');
+        Route::get('cancel-confirmed', [SubscriptionController::class, 'subscriberCancelConfirmed'])->name('cancel-confirmed');
+    });
 
 // hit log
 Route::post('/hit-log',[HitLogController::class,'hitLog'])->name('hitLog');

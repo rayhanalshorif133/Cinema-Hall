@@ -32,6 +32,7 @@
     <link href="{{ asset('assets/dist/owlcarousel/assets/owl.carousel.css') }}" rel="stylesheet">
     {{-- cdn --}}
     <link href="{{ asset('assets/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/common.css') }}" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
 

@@ -1,6 +1,14 @@
 @include('layouts._partials.headTag')
 <body>
     @include('layouts._partials.header')
+    <div class="container pt-17px subscribeBtn">
+      <div class="text-center mx-auto">
+  <span class="text-white fsz-1">Enjoy unlimited entertainment @ BDT2.30/day</span><br>  
+  <a href="http://mmgamers.b2mwap.com/subscription/confirmation" class="btn btn-lg bg-red text-white px-5 mt-12px">
+    Subscribe
+  </a>
+</div>
+</div>
     @yield('content')
     @include('layouts._partials.footer')
    
