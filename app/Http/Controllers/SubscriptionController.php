@@ -24,7 +24,7 @@ class SubscriptionController extends Controller
             return redirect()->route('home');
         }
 
-        return view('public.subscribe.confirmation', compact('categories','phone'));
+        return view('public.subscribe.confirmation', compact('categories', 'phone'));
     }
 
     public function subscriberConfirmed()
@@ -44,20 +44,30 @@ class SubscriptionController extends Controller
         } else {
 
 
-            $getSubscriberInfo = Http::get('/api/subscriber-notification?service_key=CH&msisdn=01323174104');
+            $api_url = 'https://random-app.technical-content.xyz/api/subscriber-notification?service_key=CH&msisdn=+8801323174104';// Read JSON file
+            $json_data = file_get_contents($api_url);
+            // Decode JSON data into PHP array
+            $response_data = json_decode($json_data);
+            // All user data exists in 'data' object
+            $subscriber_data = $response_data->data;
 
-            dd($getSubscriberInfo->json());
-            
-            Subscriber::create([
-                'msisdn' => $this->get_msisdn(),
-                'opr' => $this->get_opr(),
-                'status' => 1,
-                'last_update' => now()->format('Y-m-d H:i:s'),
-                'created' => now()->format('Y-m-d H:i:s'),
-                'modified' => now()->format('Y-m-d H:i:s'),
-            ]);
+            if($subscriber_data){
+                $new_subscriber = new Subscriber();
+                $new_subscriber->msisdn = $subscriber_data->msisdn;
+                $new_subscriber->opr = $subscriber_data->opr;
+                $new_subscriber->channel = $subscriber_data->channel;
+                $new_subscriber->status = 1;
+                $new_subscriber->service = $subscriber_data->service;
+                $new_subscriber->subs_date = $subscriber_data->push_date;
+                $new_subscriber->charge_date = $subscriber_data->push_date;
+                $new_subscriber->entry = $subscriber_data->counter;
+                $new_subscriber->tid = $subscriber_data->tid;
+                $new_subscriber->last_update = $subscriber_data->counter_reset_date;
+                $new_subscriber->save();
+            }
+
         }
-       
+
 
         return view('subscribe.confirmed');
     }

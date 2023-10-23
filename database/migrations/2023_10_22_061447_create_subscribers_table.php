@@ -17,6 +17,7 @@ class CreateSubscribersTable extends Migration
             $table->id(); 
             $table->string('msisdn')->nullable();
             $table->string('rmsisdn')->nullable();
+            $table->string('tid')->nullable();
             $table->string('opr')->nullable();
             $table->string('channel')->nullable();
             $table->string('status')->nullable();
@@ -32,7 +33,6 @@ class CreateSubscribersTable extends Migration
             $table->string('in_msg_id')->nullable();
             $table->string('zoneid')->nullable();
             $table->string('flag')->nullable();
-            $table->string('tid')->nullable();
             $table->timestamps();
         });
     }
