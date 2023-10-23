@@ -12,8 +12,6 @@ class SubscriptionController extends Controller
     {
 
         // env variables
-        $get = env('SUBSCRIPTION_API_URL');
-        dd($get);
 
         $homeController = new HomeController();
         $categories = $homeController->category_info();
@@ -24,7 +22,7 @@ class SubscriptionController extends Controller
             ->where('status', 1)
             ->first();
         if ($isSubscriber) {
-            $this->flashMessageSuccess('You are already subscribed');
+            flash()->addSuccess('You are already subscribed');
             return redirect()->route('home');
         }
 
@@ -37,12 +35,11 @@ class SubscriptionController extends Controller
         $isSubscriber = Subscriber::where('msisdn', $this->get_msisdn())->first();
         if ($isSubscriber) {
             if ($isSubscriber->status == 1) {
-                $this->flashMessageSuccess('You are already subscribed');
+                flash()->addSuccess('You are already subscribed');
                 return redirect()->route('home');
             } else {
                 $isSubscriber->update([
                     'status' => 1,
-                    'modified' => now()->format('Y-m-d H:i:s'),
                     'last_update' => now()->format('Y-m-d H:i:s'),
                 ]);
             }
@@ -59,7 +56,7 @@ class SubscriptionController extends Controller
 
             if($subscriber_data){
                 $new_subscriber = new Subscriber();
-                $new_subscriber->msisdn = $subscriber_data->msisdn;
+                $new_subscriber->msisdn = $this->get_msisdn();
                 $new_subscriber->opr = $subscriber_data->opr;
                 $new_subscriber->channel = $subscriber_data->channel;
                 $new_subscriber->status = 1;
@@ -70,12 +67,15 @@ class SubscriptionController extends Controller
                 $new_subscriber->tid = $subscriber_data->tid;
                 $new_subscriber->last_update = $subscriber_data->counter_reset_date;
                 $new_subscriber->save();
+                $homeController = new HomeController();
+                $categories = $homeController->category_info();
+                flash()->addSuccess('Subscription has been successful');
+                return view('public.subscribe.confirmed', compact('categories'));
             }
 
         }
-
-
-        return view('subscribe.confirmed');
+        flash('All Subscription has been done');
+        return redirect()->back();
     }
 
     public function subscriberCancelConfirmation()
