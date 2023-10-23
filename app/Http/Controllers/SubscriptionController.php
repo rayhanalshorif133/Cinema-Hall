@@ -11,6 +11,10 @@ class SubscriptionController extends Controller
     public function subscriberConfirmation()
     {
 
+        // env variables
+        $get = env('SUBSCRIPTION_API_URL');
+        dd($get);
+
         $homeController = new HomeController();
         $categories = $homeController->category_info();
         $phone = $this->get_msisdn();
@@ -29,6 +33,7 @@ class SubscriptionController extends Controller
 
     public function subscriberConfirmed()
     {
+
         $isSubscriber = Subscriber::where('msisdn', $this->get_msisdn())->first();
         if ($isSubscriber) {
             if ($isSubscriber->status == 1) {
@@ -42,6 +47,7 @@ class SubscriptionController extends Controller
                 ]);
             }
         } else {
+
 
 
             $api_url = 'https://random-app.technical-content.xyz/api/subscriber-notification?service_key=CH&msisdn=+8801323174104';// Read JSON file
