@@ -49,8 +49,14 @@ class SubscriptionController extends Controller
 
 
 
-            $api_url = 'https://random-app.technical-content.xyz/api/subscriber-notification?service_key=CH&msisdn=+8801323174104';// Read JSON file
-            $json_data = file_get_contents($api_url);
+            $arrContextOptions= [
+                'ssl' => [
+                    'verify_peer'=> false,
+                    'verify_peer_name'=> false,
+                ],
+            ];
+            $api_url = 'https://random-app.technical-content.xyz/api/subscriber-notification?service_key=CH&msisdn=' . $this->get_msisdn(); // Read JSON file
+            $json_data = file_get_contents($api_url,false, stream_context_create($arrContextOptions));
             // Decode JSON data into PHP array
             $response_data = json_decode($json_data);
             // All user data exists in 'data' object
@@ -104,15 +110,32 @@ class SubscriptionController extends Controller
         ->where('status', 1)
         ->first();
         if ($isSubscriber) {
+
+            $arrContextOptions= [
+                'ssl' => [
+                    'verify_peer'=> false,
+                    'verify_peer_name'=> false,
+                ],
+            ];
             
-            $api_url = 'https://random-app.technical-content.xyz/api/unsubscriber-notification?service_key=CH&msisdn=+8801323174104';// Read JSON file
-            $json_data = file_get_contents($api_url);
-            $isSubscriber->update([
-                'status' => 0,
-                'modified' => now()->format('Y-m-d H:i:s'),
-                'last_update' => now()->format('Y-m-d H:i:s'),
-            ]);
-            flash('You are unsubscribed');
+            
+            $api_url = 'https://random-app.technical-content.xyz/api/unsubscriber-notification?service_key=CH&msisdn=' . $this->get_msisdn(); // Read JSON file
+            $json_data = file_get_contents($api_url,false,
+            stream_context_create($arrContextOptions));
+            // Decode JSON data into PHP array
+            $response_data = json_decode($json_data);
+
+            
+            // All user data exists in 'data' object
+            $subscriber_data = $response_data->data;
+            if($subscriber_data){
+                $isSubscriber->update([
+                    'status' => 0,
+                    'modified' => now()->format('Y-m-d H:i:s'),
+                    'last_update' => now()->format('Y-m-d H:i:s'),
+                ]);
+                flash('You are unsubscribed');
+            }
         }else{
             flash('You are already unsubscribed');
         }
