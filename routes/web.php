@@ -10,6 +10,7 @@ use App\Http\Controllers\WatchController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\HitLogController;
+use App\Http\Controllers\AccountController;
 
 
 /*
@@ -103,3 +104,6 @@ Route::name('subscription.')
 
 // hit log
 Route::post('/hit-log',[HitLogController::class,'hitLog'])->name('hitLog');
+
+// account
+Route::get('/account',[AccountController::class,'index'])->name('account.index');

@@ -414,6 +414,14 @@
     margin-top: 7px;
 }
 
+.pt-17px{
+    margin-top: 17px;
+}
+
+.mt-10rem{
+    margin-top: 10rem; 
+}
+
 /* left */
 .left-0{
     left: 0;
@@ -709,6 +717,52 @@
     #pc-nav-panel{
         display:none;
     }
+}
+
+.account_icon {
+    text-align: center;
+}
+.account_icon i{
+    font-size: 6rem;
+    color:#676767;
+}
+
+.text-2xl {
+    font-size: 1.5rem;
+    line-height: 2rem;
+}
+
+
+
+.account_box_container .box{
+    background-color: #3a3a3a;
+    padding: 0.7rem 1rem;
+    border-radius: 0.5rem;
+    display: flex;
+    margin: 5px 0;
+    justify-content: space-between;
+}
+.account_box_container .box h4{
+    color:#ffffff;
+    margin-top:6px;
+    font-size:20px;
+}
+.account_box_container .box .badge{
+    font-size:16px;
+    border-radius: 2rem;
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    
+}
+
+.account_box_container .box:nth-child(1) .badge{
+    background-color: #9ffdff;   
+    color:#00686a;
+}
+.account_box_container .box:nth-child(2) .badge{
+    background-color: #d787fe;   
+    color:#620192;
 }
  
 
