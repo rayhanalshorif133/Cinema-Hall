@@ -32,6 +32,11 @@ class HomeController extends Controller
         $isSubscriber = Subscriber::where('msisdn', $this->get_msisdn() ? $this->get_msisdn() : "0")
             ->where('status', 1)
             ->first();
+        if($isSubscriber){
+            $isSubscriber = true;
+        }else{
+            $isSubscriber = false;
+        }
         return view('home', compact('categories', 'favoriteContents','isSubscriber'));
     }
 

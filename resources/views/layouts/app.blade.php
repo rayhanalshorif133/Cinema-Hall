@@ -2,7 +2,7 @@
 <body>
     @include('layouts._partials.header')
     @isset($isSubscriber)
-    @if($isSubscriber->status == 0)
+    @if($isSubscriber == false)
     <div class="container pt-17px subscribeBtn">
       <div class="text-center mx-auto">
         <span class="text-white fsz-1">Enjoy unlimited entertainment @ BDT2.30/day</span><br>  

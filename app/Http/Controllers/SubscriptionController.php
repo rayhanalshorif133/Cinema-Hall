@@ -42,6 +42,8 @@ class SubscriptionController extends Controller
                     'status' => 1,
                     'last_update' => now()->format('Y-m-d H:i:s'),
                 ]);
+                flash('Subscription has been successful');
+                return redirect()->route('home');
             }
         } else {
 
@@ -69,13 +71,12 @@ class SubscriptionController extends Controller
                 $new_subscriber->save();
                 $homeController = new HomeController();
                 $categories = $homeController->category_info();
-                flash()->addSuccess('Subscription has been successful');
-                return view('public.subscribe.confirmed', compact('categories'));
+                flash('Subscription has been successful');
+                return redirect()->route('home');
             }
 
         }
-        flash('All Subscription has been done');
-        return redirect()->back();
+        return redirect()->route('home');
     }
 
     public function subscriberCancelConfirmation()
@@ -99,18 +100,22 @@ class SubscriptionController extends Controller
     public function subscriberCancelConfirmed()
     {
         $isSubscriber = Subscriber::select()
-            ->where('msisdn', $this->get_msisdn())
-            ->first();
+        ->where('msisdn', $this->get_msisdn())
+        ->where('status', 1)
+        ->first();
         if ($isSubscriber) {
+            
+            $api_url = 'https://random-app.technical-content.xyz/api/unsubscriber-notification?service_key=CH&msisdn=+8801323174104';// Read JSON file
+            $json_data = file_get_contents($api_url);
             $isSubscriber->update([
                 'status' => 0,
                 'modified' => now()->format('Y-m-d H:i:s'),
                 'last_update' => now()->format('Y-m-d H:i:s'),
             ]);
+            flash('You are unsubscribed');
+        }else{
+            flash('You are already unsubscribed');
         }
-        $homeController = new HomeController();
-        $categories = $homeController->category_info();
-        flash('You are unsubscribed');
-        return view('public.subscribe.cancel-confirmed','categories');
+        return redirect()->route('home');
     }
 }
