@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Content;
 use App\Models\Favorite;
+use App\Models\Subscriber;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -27,7 +28,11 @@ class HomeController extends Controller
         if(gettype($favoriteContents) === "object" && count($favoriteContents) == 0){
             $favoriteContents = $favoriteContents->toArray();
         }
-        return view('home', compact('categories', 'favoriteContents'));
+
+        $isSubscriber = Subscriber::where('msisdn', $this->get_msisdn() ? $this->get_msisdn() : "0")
+            ->where('status', 1)
+            ->first();
+        return view('home', compact('categories', 'favoriteContents','isSubscriber'));
     }
 
 

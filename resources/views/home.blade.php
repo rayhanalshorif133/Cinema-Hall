@@ -1,4 +1,4 @@
-@extends('layouts.app', ['title' => 'Cinema-Hall | Home'])
+@extends('layouts.app', ['title' => 'Cinema-Hall | Home', 'isSubscriber' => $isSubscriber])
 
 @push('styles')
 @endpush
