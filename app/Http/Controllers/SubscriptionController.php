@@ -91,7 +91,9 @@ class SubscriptionController extends Controller
             return redirect()->route('home');
         }
 
-        return view('subscribe.cancel', compact('phone'));
+        $homeController = new HomeController();
+                $categories = $homeController->category_info();
+        return view('public.subscribe.cancel', compact('phone','categories'));
     }
 
     public function subscriberCancelConfirmed()
@@ -106,7 +108,9 @@ class SubscriptionController extends Controller
                 'last_update' => now()->format('Y-m-d H:i:s'),
             ]);
         }
-        $this->flashMessageSuccess('You are unsubscribed');
-        return view('subscribe.cancel-confirmed');
+        $homeController = new HomeController();
+        $categories = $homeController->category_info();
+        flash('You are unsubscribed');
+        return view('public.subscribe.cancel-confirmed','categories');
     }
 }
